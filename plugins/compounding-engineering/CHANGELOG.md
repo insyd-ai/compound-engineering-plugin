@@ -5,11 +5,18 @@ All notable changes to the compounding-engineering plugin will be documented in 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.6.1] - 2024-11-26
+## [2.6.2] - 2025-11-27
 
 ### Improved
 
-- **`/plan` command** - Replaced vague "keep asking questions" ending with clear post-generation options menu. Users now see 5 explicit choices: Start `/work`, Run `/plan_review`, Simplify, Rework, or Other.
+- **`/plan` command** - Added AskUserQuestion tool for post-generation options and year note (2025) for accurate date awareness.
+- **Research agents** - Added year note (2025) to all 4 research agents (best-practices-researcher, framework-docs-researcher, git-history-analyzer, repo-research-analyst) for accurate date awareness when searching documentation.
+
+## [2.6.1] - 2025-11-26
+
+### Improved
+
+- **`/plan` command** - Replaced vague "keep asking questions" ending with clear post-generation options menu. Users now see 4 explicit choices via AskUserQuestion: Start `/work`, Run `/plan_review`, Simplify, or Rework.
 
 ## [2.6.0] - 2024-11-26
 

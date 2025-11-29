@@ -5,6 +5,12 @@ All notable changes to the compounding-engineering plugin will be documented in 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.2] - 2025-11-28
+
+### Changed
+
+- **`gemini-imagegen` skill** - Updated to use only Pro model (`gemini-2.0-flash-preview-image-generation`) by default. Removed regular Nano Banana model reference. Added explicit options for aspect ratio (1:1 to 21:9) and resolution (1K default, 2K, 4K). Simplified documentation with clear defaults.
+
 ## [2.8.1] - 2025-11-27
 
 ### Added

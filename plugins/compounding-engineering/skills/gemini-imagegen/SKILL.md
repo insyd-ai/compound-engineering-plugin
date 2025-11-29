@@ -1,50 +1,49 @@
 ---
 name: gemini-imagegen
-description: Generate and edit images using the Gemini API (Nano Banana). Use this skill when creating images from text prompts, editing existing images, applying style transfers, generating logos with text, creating stickers, product mockups, or any image generation/manipulation task. Supports text-to-image, image editing, multi-turn refinement, and composition from multiple reference images.
+description: Generate and edit images using the Gemini API (Nano Banana Pro). Use this skill when creating images from text prompts, editing existing images, applying style transfers, generating logos with text, creating stickers, product mockups, or any image generation/manipulation task. Supports text-to-image, image editing, multi-turn refinement, and composition from multiple reference images.
 ---
 
-# Gemini Image Generation (Nano Banana)
+# Gemini Image Generation (Nano Banana Pro)
 
 Generate and edit images using Google's Gemini API. The environment variable `GEMINI_API_KEY` must be set.
 
-## Available Models
+## Default Model
 
-| Model | Alias | Resolution | Best For |
-|-------|-------|------------|----------|
-| `gemini-2.5-flash-image` | Nano Banana | 1024px | Speed, high-volume tasks |
-| `gemini-3-pro-image-preview` | Nano Banana Pro | Up to 4K | Professional assets, complex instructions, text rendering |
+| Model | Resolution | Best For |
+|-------|------------|----------|
+| `gemini-3-pro-image-preview` | 1K-4K | All image generation (default) |
 
-## Quick Start Scripts
+**Note:** Always use this Pro model. Only use a different model if explicitly requested.
 
-### Text-to-Image
-```bash
-python scripts/generate_image.py "A cat wearing a wizard hat" output.png
-```
+## Quick Reference
 
-### Edit Existing Image
-```bash
-python scripts/edit_image.py input.png "Add a rainbow in the background" output.png
-```
+### Default Settings
+- **Model:** `gemini-3-pro-image-preview`
+- **Resolution:** 1K (default, options: 1K, 2K, 4K)
+- **Aspect Ratio:** 1:1 (default)
 
-### Multi-Turn Chat (Iterative Refinement)
-```bash
-python scripts/multi_turn_chat.py
-```
+### Available Aspect Ratios
+`1:1`, `2:3`, `3:2`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9`
+
+### Available Resolutions
+`1K` (default), `2K`, `4K`
 
 ## Core API Pattern
 
-All image generation uses the `generateContent` endpoint with `responseModalities: ["TEXT", "IMAGE"]`:
-
 ```python
 import os
-import base64
 from google import genai
+from google.genai import types
 
 client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
+# Basic generation (1K, 1:1 - defaults)
 response = client.models.generate_content(
-    model="gemini-2.5-flash-image",
+    model="gemini-3-pro-image-preview",
     contents=["Your prompt here"],
+    config=types.GenerateContentConfig(
+        response_modalities=['TEXT', 'IMAGE'],
+    ),
 )
 
 for part in response.parts:
@@ -55,9 +54,7 @@ for part in response.parts:
         image.save("output.png")
 ```
 
-## Image Configuration Options
-
-Control output with `image_config`:
+## Custom Resolution & Aspect Ratio
 
 ```python
 from google.genai import types
@@ -68,11 +65,43 @@ response = client.models.generate_content(
     config=types.GenerateContentConfig(
         response_modalities=['TEXT', 'IMAGE'],
         image_config=types.ImageConfig(
-            aspect_ratio="16:9",  # 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9
-            image_size="2K"       # 1K, 2K, 4K (Pro only for 4K)
+            aspect_ratio="16:9",  # Wide format
+            image_size="2K"       # Higher resolution
         ),
     )
 )
+```
+
+### Resolution Examples
+
+```python
+# 1K (default) - Fast, good for previews
+image_config=types.ImageConfig(image_size="1K")
+
+# 2K - Balanced quality/speed
+image_config=types.ImageConfig(image_size="2K")
+
+# 4K - Maximum quality, slower
+image_config=types.ImageConfig(image_size="4K")
+```
+
+### Aspect Ratio Examples
+
+```python
+# Square (default)
+image_config=types.ImageConfig(aspect_ratio="1:1")
+
+# Landscape wide
+image_config=types.ImageConfig(aspect_ratio="16:9")
+
+# Ultra-wide panoramic
+image_config=types.ImageConfig(aspect_ratio="21:9")
+
+# Portrait
+image_config=types.ImageConfig(aspect_ratio="9:16")
+
+# Photo standard
+image_config=types.ImageConfig(aspect_ratio="4:3")
 ```
 
 ## Editing Images
@@ -84,8 +113,11 @@ from PIL import Image
 
 img = Image.open("input.png")
 response = client.models.generate_content(
-    model="gemini-2.5-flash-image",
+    model="gemini-3-pro-image-preview",
     contents=["Add a sunset to this scene", img],
+    config=types.GenerateContentConfig(
+        response_modalities=['TEXT', 'IMAGE'],
+    ),
 )
 ```
 
@@ -97,7 +129,7 @@ Use chat for iterative editing:
 from google.genai import types
 
 chat = client.chats.create(
-    model="gemini-2.5-flash-image",
+    model="gemini-3-pro-image-preview",
     config=types.GenerateContentConfig(response_modalities=['TEXT', 'IMAGE'])
 )
 
@@ -119,14 +151,14 @@ Specify style explicitly:
 > "A kawaii-style sticker of a happy red panda, bold outlines, cel-shading, white background"
 
 ### Text in Images
-Be explicit about font style and placement. Use `gemini-3-pro-image-preview` for best results:
+Be explicit about font style and placement:
 > "Create a logo with text 'Daily Grind' in clean sans-serif, black and white, coffee bean motif"
 
 ### Product Mockups
 Describe lighting setup and surface:
 > "Studio-lit product photo on polished concrete, three-point softbox setup, 45-degree angle"
 
-## Advanced Features (Pro Model Only)
+## Advanced Features
 
 ### Google Search Grounding
 Generate images based on real-time data:
@@ -154,19 +186,10 @@ response = client.models.generate_content(
         Image.open("person2.png"),
         Image.open("person3.png"),
     ],
+    config=types.GenerateContentConfig(
+        response_modalities=['TEXT', 'IMAGE'],
+    ),
 )
-```
-
-## REST API (curl)
-
-```bash
-curl -s -X POST \
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent" \
-  -H "x-goog-api-key: $GEMINI_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "contents": [{"parts": [{"text": "A serene mountain landscape"}]}]
-  }' | jq -r '.candidates[0].content.parts[] | select(.inlineData) | .inlineData.data' | base64 --decode > output.png
 ```
 
 ## Notes
@@ -174,3 +197,4 @@ curl -s -X POST \
 - All generated images include SynthID watermarks
 - Image-only mode (`responseModalities: ["IMAGE"]`) won't work with Google Search grounding
 - For editing, describe changes conversationally—the model understands semantic masking
+- Default to 1K resolution for speed; use 2K/4K when quality is critical

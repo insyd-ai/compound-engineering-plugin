@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- **`prime.md`** - Removed from plugin (personal setup command, not for distribution)
 - **`codify.md`** - Removed deprecated command (replaced by `/compound`)
 
 ## [2.10.0] - 2025-12-10

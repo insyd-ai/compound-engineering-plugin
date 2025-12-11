@@ -7,7 +7,7 @@ AI-powered development tools that get smarter with every use. Make each unit of 
 | Component | Count |
 |-----------|-------|
 | Agents | 25 |
-| Commands | 19 |
+| Commands | 17 |
 | Skills | 12 |
 | MCP Servers | 2 |
 
@@ -87,7 +87,6 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 | `/generate_command` | Generate new slash commands |
 | `/heal-skill` | Fix skill documentation issues |
 | `/plan_review` | Multi-agent plan review in parallel |
-| `/prime` | Prime/setup command |
 | `/report-bug` | Report a bug in the plugin |
 | `/reproduce-bug` | Reproduce bugs using logs and console |
 | `/resolve_parallel` | Resolve TODO comments in parallel |

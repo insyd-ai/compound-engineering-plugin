@@ -5,6 +5,18 @@ All notable changes to the compound-engineering plugin will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.23.1] - 2026-01-08
+
+### Changed
+
+- **Agent model inheritance** - All 26 agents now use `model: inherit` so they match the user's configured model. Only `lint` keeps `model: haiku` for cost efficiency. (fixes #69)
+
+### Summary
+
+- 27 agents, 21 commands, 13 skills, 2 MCP servers
+
+---
+
 ## [2.23.0] - 2026-01-08
 
 ### Added

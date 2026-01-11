@@ -8,18 +8,16 @@ argument-hint: "[GitHub issue number]"
 
 Look at github issue #$ARGUMENTS and read the issue description and comments.
 
-## Phase 1: Log Investigation
+## Phase 1: Codebase Investigation
 
-Run the following agents in parallel to investigate the bug:
+Analyze the codebase to understand where the bug might be occurring:
 
-1. Task rails-console-explorer(issue_description)
-2. Task appsignal-log-investigator(issue_description)
+1. **Read the issue carefully** - Understand the expected vs actual behavior
+2. **Search the codebase** - Use Grep and Glob to find relevant files
+3. **Trace the code path** - Follow the execution flow from entry point to where the bug occurs
+4. **Check recent commits** - Use git history to see if recent changes might have introduced the bug
 
 Think about the places it could go wrong looking at the codebase. Look for logging output we can look for.
-
-Run the agents again to find any logs that could help us reproduce the bug.
-
-Keep running these agents until you have a good idea of what is going on.
 
 ## Phase 2: Visual Reproduction with Playwright
 
@@ -32,7 +30,7 @@ mcp__plugin_compound-engineering_pw__browser_navigate({ url: "http://localhost:3
 mcp__plugin_compound-engineering_pw__browser_snapshot({})
 ```
 
-If server not running, inform user to start `bin/dev`.
+If server not running, inform user to start their dev server (e.g., `bun run dev`, `bun dev`, or similar).
 
 ### Step 2: Navigate to Affected Area
 
@@ -67,6 +65,11 @@ Reproduce the exact steps from the issue:
    mcp__plugin_compound-engineering_pw__browser_console_messages({ level: "error" })
    ```
 
+4. **Check network requests for API errors:**
+   ```
+   mcp__plugin_compound-engineering_pw__browser_network_requests({})
+   ```
+
 ### Step 5: Capture Bug State
 
 When you reproduce the bug:
@@ -83,9 +86,10 @@ mcp__plugin_compound-engineering_pw__browser_take_screenshot({ filename: "bug-[i
 
 **Reference Collection:**
 
-- [ ] Document all research findings with specific file paths (e.g., `app/services/example_service.rb:42`)
+- [ ] Document all research findings with specific file paths (e.g., `src/components/Example.tsx:42`)
 - [ ] Include screenshots showing the bug reproduction
 - [ ] List console errors if any
+- [ ] List failed network requests if any
 - [ ] Document the exact reproduction steps
 
 ## Phase 4: Report Back

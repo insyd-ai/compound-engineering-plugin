@@ -1,37 +1,38 @@
 {
-  "name": "every-marketplace",
+  "name": "insyd-marketplace",
   "owner": {
-    "name": "Every Inc.",
-    "url": "https://github.com/EveryInc"
+    "name": "Insyd-AI",
+    "url": "https://github.com/insyd-ai"
   },
   "metadata": {
-    "description": "Official Every plugin marketplace for Claude Code extensions",
+    "description": "Insyd-AI plugin marketplace for Claude Code engineering extensions",
     "version": "1.0.0"
   },
   "plugins": [
     {
-      "name": "compound-engineering",
-      "description": "AI-powered development tools that get smarter with every use. Make each unit of engineering work easier than the last. Includes 27 specialized agents, 20 commands, and 12 skills.",
-      "version": "2.21.0",
+      "name": "insyd-engineering",
+      "description": "Engineering plugin for modern JavaScript/TypeScript development workflows. Includes 21 specialized agents, 20 commands, and 11 skills for spec writing (PRD+TDD), functional testing, code review, refactoring, and codebase understanding. Optimized for Convex, Next.js, Astro, React, and Vite projects.",
+      "version": "2.0.0",
       "author": {
-        "name": "Kieran Klaassen",
-        "url": "https://github.com/kieranklaassen",
-        "email": "kieran@every.to"
+        "name": "Insyd-AI",
+        "url": "https://github.com/insyd-ai"
       },
-      "homepage": "https://github.com/EveryInc/compound-engineering-plugin",
-      "tags": ["ai-powered", "compound-engineering", "workflow-automation", "code-review", "quality", "knowledge-management", "image-generation"],
+      "homepage": "https://github.com/insyd-ai/compound-engineering-plugin",
+      "tags": [
+        "typescript",
+        "javascript",
+        "nextjs",
+        "convex",
+        "astro",
+        "react",
+        "vite",
+        "testing",
+        "code-review",
+        "refactoring",
+        "playwright",
+        "engineering"
+      ],
       "source": "./plugins/compound-engineering"
-    },
-    {
-      "name": "coding-tutor",
-      "description": "Personalized coding tutorials that build on your existing knowledge and use your actual codebase for examples. Includes spaced repetition quizzes to reinforce learning. Includes 3 commands and 1 skill.",
-      "version": "1.2.1",
-      "author": {
-        "name": "Nityesh Agarwal"
-      },
-      "homepage": "https://github.com/EveryInc/compound-engineering-plugin",
-      "tags": ["coding", "programming", "tutorial", "learning", "spaced-repetition", "education"],
-      "source": "./plugins/coding-tutor"
     }
   ]
 }

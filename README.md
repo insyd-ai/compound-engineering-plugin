@@ -1,12 +1,13 @@
-# Compound Engineering Plugin
+# Insyd Engineering Plugin
 
-A Claude Code plugin that makes each unit of engineering work easier than the last.
+A Claude Code plugin for JavaScript/TypeScript development workflows.
+
+> Forked from [compound-engineering-plugin](https://github.com/EveryInc/every-marketplace) by Every Inc.
 
 ## Install
 
 ```bash
-/plugin marketplace add https://github.com/EveryInc/compound-engineering-plugin
-/plugin install compound-engineering
+claude plugin add insyd-ai/compound-engineering-plugin
 ```
 
 ## Workflow
@@ -22,22 +23,37 @@ Plan → Work → Review → Compound → Repeat
 | `/workflows:review` | Multi-agent code review before merging |
 | `/workflows:compound` | Document learnings to make future work easier |
 
-Each cycle compounds: plans inform future plans, reviews catch more issues, patterns get documented.
+## Target Stack
 
-## Philosophy
+- **Backend**: Convex
+- **Frontend**: Next.js, Astro, React, Vite
+- **Languages**: TypeScript, JavaScript
 
-**Each unit of engineering work should make subsequent units easier—not harder.**
+## Use Cases
 
-Traditional development accumulates technical debt. Every feature adds complexity. The codebase becomes harder to work with over time.
+1. Spec writing
+2. Functional testcases (success criteria)
+3. Code writing (frontend, backend)
+4. Test writing and execution
+5. Code refactoring
+6. Understanding large codebases
+7. Self checks
+8. PR reviews
 
-Compound engineering inverts this. 80% is in planning and review, 20% is in execution:
-- Plan thoroughly before writing code
-- Review to catch issues and capture learnings
-- Codify knowledge so it's reusable
-- Keep quality high so future changes are easy
+## Components
+
+| Type | Count |
+|------|-------|
+| Agents | 18 |
+| Commands | 16 |
+| Skills | 8 |
+| MCP Servers | 2 |
 
 ## Learn More
 
-- [Full component reference](plugins/compound-engineering/README.md) - all agents, commands, skills
-- [Compound engineering: how Every codes with agents](https://every.to/chain-of-thought/compound-engineering-how-every-codes-with-agents)
-- [The story behind compounding engineering](https://every.to/source-code/my-ai-had-already-fixed-the-code-before-i-saw-it)
+- [Full component reference](plugins/compound-engineering/README.md)
+- [Changelog](plugins/compound-engineering/CHANGELOG.md)
+
+## Credits
+
+Forked from [compound-engineering-plugin](https://github.com/EveryInc/every-marketplace) originally created by Kieran Klaassen at Every Inc.

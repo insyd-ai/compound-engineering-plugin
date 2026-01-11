@@ -1,21 +1,36 @@
-# Compounding Engineering Plugin
+# Insyd Engineering Plugin
 
-AI-powered development tools that get smarter with every use. Make each unit of engineering work easier than the last.
+Engineering plugin for modern JavaScript/TypeScript development workflows. Optimized for Convex, Next.js, Astro, React, and Vite projects.
+
+> Forked from [compound-engineering-plugin](https://github.com/EveryInc/every-marketplace) by Every Inc.
+
+## Use Cases
+
+This plugin is designed for 8 core engineering workflows:
+
+1. **Spec Writing** - Analyze specifications for completeness and user flows
+2. **Functional Testcases** - Define success criteria and test scenarios
+3. **Code Writing** - Frontend (React, Next.js, Astro, Vite) and backend (Convex) development
+4. **Test Writing & Execution** - Unit, integration, and functional tests with Playwright
+5. **Code Refactoring** - Simplify and improve code quality
+6. **Codebase Understanding** - Index and analyze large codebases
+7. **Self Checks** - Security, performance, and architecture reviews
+8. **PR Reviews** - Comprehensive code review with specialized agents
 
 ## Components
 
 | Component | Count |
 |-----------|-------|
-| Agents | 27 |
+| Agents | 21 |
 | Commands | 20 |
-| Skills | 13 |
+| Skills | 11 |
 | MCP Servers | 2 |
 
 ## Agents
 
 Agents are organized into categories for easier discovery.
 
-### Review (14)
+### Review (11)
 
 | Agent | Description |
 |-------|-------------|
@@ -25,14 +40,11 @@ Agents are organized into categories for easier discovery.
 | `data-integrity-guardian` | Database migrations and data integrity |
 | `data-migration-expert` | Validate ID mappings match production, check for swapped values |
 | `deployment-verification-agent` | Create Go/No-Go deployment checklists for risky data changes |
-| `dhh-rails-reviewer` | Rails review from DHH's perspective |
-| `kieran-rails-reviewer` | Rails code review with strict conventions |
-| `kieran-python-reviewer` | Python code review with strict conventions |
 | `kieran-typescript-reviewer` | TypeScript code review with strict conventions |
+| `julik-frontend-races-reviewer` | Review JavaScript/Stimulus code for race conditions |
 | `pattern-recognition-specialist` | Analyze code for patterns and anti-patterns |
 | `performance-oracle` | Performance analysis and optimization |
 | `security-sentinel` | Security audits and vulnerability assessments |
-| `julik-frontend-races-reviewer` | Review JavaScript/Stimulus code for race conditions |
 
 ### Research (4)
 
@@ -43,29 +55,16 @@ Agents are organized into categories for easier discovery.
 | `git-history-analyzer` | Analyze git history and code evolution |
 | `repo-research-analyst` | Research repository structure and conventions |
 
-### Design (3)
-
-| Agent | Description |
-|-------|-------------|
-| `design-implementation-reviewer` | Verify UI implementations match Figma designs |
-| `design-iterator` | Iteratively refine UI through systematic design iterations |
-| `figma-design-sync` | Synchronize web implementations with Figma designs |
-
-### Workflow (5)
+### Workflow (6)
 
 | Agent | Description |
 |-------|-------------|
 | `bug-reproduction-validator` | Systematically reproduce and validate bug reports |
-| `every-style-editor` | Edit content to conform to Every's style guide |
-| `lint` | Run linting and code quality checks on Ruby and ERB files |
+| `functional-test-writer` | Generate comprehensive functional test cases |
 | `pr-comment-resolver` | Address PR comments and implement fixes |
+| `prd-writer` | Generate Product Requirements Documents from user perspective |
 | `spec-flow-analyzer` | Analyze user flows and identify gaps in specifications |
-
-### Docs (1)
-
-| Agent | Description |
-|-------|-------------|
-| `ankane-readme-writer` | Create READMEs following Ankane-style template for Ruby gems |
+| `tdd-writer` | Generate Technical Design Documents for implementation |
 
 ## Commands
 
@@ -80,25 +79,31 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 | `/workflows:work` | Execute work items systematically |
 | `/workflows:compound` | Document solved problems to compound team knowledge |
 
+### Spec & Testing Commands
+
+| Command | Description |
+|---------|-------------|
+| `/spec:write` | Generate PRD and TDD specification documents |
+| `/test:functional` | Generate functional test cases with success criteria |
+| `/test:write` | Write unit, integration, or E2E tests |
+| `/self-check` | Run pre-commit validation checks |
+
 ### Utility Commands
 
 | Command | Description |
 |---------|-------------|
-| `/deepen-plan` | Enhance plans with parallel research agents for each section |
-| `/changelog` | Create engaging changelogs for recent merges |
+| `/agent-native-audit` | Run comprehensive agent-native architecture review |
 | `/create-agent-skill` | Create or edit Claude Code skills |
+| `/deepen-plan` | Enhance plans with parallel research agents for each section |
 | `/generate_command` | Generate new slash commands |
 | `/heal-skill` | Fix skill documentation issues |
 | `/plan_review` | Multi-agent plan review in parallel |
-| `/report-bug` | Report a bug in the plugin |
+| `/playwright-test` | Run browser tests on PR-affected pages |
 | `/reproduce-bug` | Reproduce bugs using logs and console |
 | `/resolve_parallel` | Resolve TODO comments in parallel |
 | `/resolve_pr_parallel` | Resolve PR comments in parallel |
 | `/resolve_todo_parallel` | Resolve todos in parallel |
 | `/triage` | Triage and prioritize issues |
-| `/playwright-test` | Run browser tests on PR-affected pages |
-| `/xcode-test` | Build and test iOS apps on simulator |
-| `/feature-video` | Record video walkthroughs and add to PR description |
 
 ## Skills
 
@@ -107,24 +112,23 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 | Skill | Description |
 |-------|-------------|
 | `agent-native-architecture` | Build AI agents using prompt-native architecture |
+| `frontend-design` | Create production-grade frontend interfaces |
+
+### Specification & Testing
+
+| Skill | Description |
+|-------|-------------|
+| `spec-writing` | Templates and guidelines for PRD and TDD creation |
+| `test-writing` | Patterns for unit, integration, and E2E testing |
+| `self-check` | Pre-commit validation with success criteria verification |
 
 ### Development Tools
 
 | Skill | Description |
 |-------|-------------|
-| `andrew-kane-gem-writer` | Write Ruby gems following Andrew Kane's patterns |
 | `compound-docs` | Capture solved problems as categorized documentation |
 | `create-agent-skills` | Expert guidance for creating Claude Code skills |
-| `dhh-rails-style` | Write Ruby/Rails code in DHH's 37signals style |
-| `dspy-ruby` | Build type-safe LLM applications with DSPy.rb |
-| `frontend-design` | Create production-grade frontend interfaces |
 | `skill-creator` | Guide for creating effective Claude Code skills |
-
-### Content & Workflow
-
-| Skill | Description |
-|-------|-------------|
-| `every-style-editor` | Review copy for Every's style guide compliance |
 | `file-todos` | File-based todo tracking system |
 | `git-worktree` | Manage Git worktrees for parallel development |
 
@@ -134,27 +138,11 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 |-------|-------------|
 | `rclone` | Upload files to S3, Cloudflare R2, Backblaze B2, and cloud storage |
 
-### Image Generation
-
-| Skill | Description |
-|-------|-------------|
-| `gemini-imagegen` | Generate and edit images using Google's Gemini API |
-
-**gemini-imagegen features:**
-- Text-to-image generation
-- Image editing and manipulation
-- Multi-turn refinement
-- Multiple reference image composition (up to 14 images)
-
-**Requirements:**
-- `GEMINI_API_KEY` environment variable
-- Python packages: `google-genai`, `pillow`
-
 ## MCP Servers
 
 | Server | Description |
 |--------|-------------|
-| `playwright` | Browser automation via `@playwright/mcp` |
+| `pw` | Browser automation via `@playwright/mcp` |
 | `context7` | Framework documentation lookup via Context7 |
 
 ### Playwright
@@ -173,14 +161,14 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 - `resolve-library-id` - Find library ID for a framework/package
 - `get-library-docs` - Get documentation for a specific library
 
-Supports 100+ frameworks including Rails, React, Next.js, Vue, Django, Laravel, and more.
+Supports 100+ frameworks including React, Next.js, Vue, Astro, Convex, and more.
 
 MCP servers start automatically when the plugin is enabled.
 
 ## Installation
 
 ```bash
-claude /plugin install compound-engineering
+claude plugin add insyd-ai/compound-engineering-plugin
 ```
 
 ## Known Issues
@@ -194,10 +182,10 @@ claude /plugin install compound-engineering
 ```json
 {
   "mcpServers": {
-    "playwright": {
+    "pw": {
       "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@playwright/mcp@latest"],
+      "command": "bunx",
+      "args": ["@playwright/mcp@latest"],
       "env": {}
     },
     "context7": {
@@ -217,3 +205,7 @@ See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
 ## License
 
 MIT
+
+## Credits
+
+Forked from [compound-engineering-plugin](https://github.com/EveryInc/every-marketplace) originally created by Kieran Klaassen at Every Inc.

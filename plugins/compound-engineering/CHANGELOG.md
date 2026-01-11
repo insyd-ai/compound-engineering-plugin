@@ -1,9 +1,122 @@
 # Changelog
 
-All notable changes to the compound-engineering plugin will be documented in this file.
+All notable changes to the Insyd Engineering plugin will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [2.0.0] - 2026-01-11
+
+### Added
+
+**New Agents (3):**
+- `prd-writer` - Generate Product Requirements Documents from user perspective
+- `tdd-writer` - Generate Technical Design Documents for implementation
+- `functional-test-writer` - Create comprehensive functional test cases
+
+**New Commands (4):**
+- `/spec:write` - Generate PRD and TDD specification documents
+- `/test:functional` - Generate functional test cases with success criteria
+- `/test:write` - Write unit, integration, or E2E tests
+- `/self-check` - Pre-commit validation checks
+
+**New Skills (3):**
+- `spec-writing` - Templates and guidelines for PRD and TDD creation
+- `test-writing` - Patterns for unit, integration, and E2E testing
+- `self-check` - Pre-commit validation with success criteria verification
+
+### Changed
+
+- `/workflows:review` - Added `model: sonnet` for Sonnet 4.5 usage, added functional test validation
+- `/workflows:work` - Added Convex integration patterns and functional test case checking
+- `repo-research-analyst` - Enhanced with large codebase navigation patterns
+
+### Summary
+
+- 21 agents (+3), 20 commands (+4), 11 skills (+3), 2 MCP servers
+- Complete development workflow implementation for 8 use cases:
+  1. Spec Writing (PRD + TDD)
+  2. Functional Test Cases
+  3. Code Writing
+  4. Test Writing & Execution
+  5. Code Refactoring
+  6. Codebase Understanding
+  7. Self-Checks (Pre-commit)
+  8. PR Reviews
+
+---
+
+## [1.0.0] - 2025-01-11 (Insyd-AI Fork)
+
+### Forked
+
+- Forked from [compound-engineering-plugin](https://github.com/EveryInc/every-marketplace) by Every Inc.
+
+### Refocused
+
+- Refocused plugin for JavaScript/TypeScript development workflows
+- Target stack: Convex, Next.js, Astro, React, Vite
+- Designed for 8 core use cases: spec writing, functional testcases, code writing, test execution, code refactoring, codebase understanding, self checks, PR reviews
+
+### Removed
+
+**Ruby/Rails agents:**
+- `kieran-rails-reviewer` - Rails code review
+- `dhh-rails-reviewer` - DHH/Rails philosophy reviewer
+- `ankane-readme-writer` - Ruby gem README writer
+- `lint` - Ruby/ERB linting
+
+**Ruby/Rails skills:**
+- `dhh-rails-style` - Ruby/Rails code in DHH style
+- `andrew-kane-gem-writer` - Ruby gem writing patterns
+- `dspy-ruby` - Ruby DSPy framework
+
+**Python agents:**
+- `kieran-python-reviewer` - Python code review
+
+**iOS/Xcode commands:**
+- `xcode-test` - iOS simulator testing
+
+**Design/Figma agents:**
+- `design-implementation-reviewer` - Figma-to-implementation verification
+- `design-iterator` - Iterative design refinement
+- `figma-design-sync` - Figma design synchronization
+
+**Image generation skills:**
+- `gemini-imagegen` - Gemini AI image generation
+
+**Company-specific:**
+- `every-style-editor` agent and skill - Every company's style guide
+
+**Plugin-specific commands:**
+- `report-bug` - Plugin bug reporting
+- `feature-video` - PR video walkthroughs
+- `changelog` - Plugin changelog generation
+- `deploy-docs` - GitHub Pages deployment
+- `release-docs` - Documentation site generation
+
+**Other:**
+- `coding-tutor` plugin (entire)
+- Old documentation and planning folders
+
+### Retained
+
+- 18 agents (TypeScript review, architecture, security, performance, research, workflow)
+- 16 commands (testing, planning, code resolution, workflows)
+- 8 skills (architecture, docs, dev tools)
+- 2 MCP servers (Playwright, Context7)
+
+### Summary
+
+- 18 agents, 16 commands, 8 skills, 2 MCP servers
+
+---
+
+## Previous Changelog (compound-engineering-plugin)
+
+The following entries are from the original compound-engineering-plugin before forking.
+
+---
 
 ## [2.23.2] - 2026-01-09
 

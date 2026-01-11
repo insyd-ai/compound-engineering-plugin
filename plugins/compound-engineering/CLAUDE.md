@@ -1,4 +1,4 @@
-# Compounding Engineering Plugin Development
+# Insyd Engineering Plugin Development
 
 ## Versioning Requirements
 
@@ -28,19 +28,24 @@ Before committing ANY changes:
 
 ```
 agents/
-├── review/     # Code review agents
-├── research/   # Research and analysis agents
-├── design/     # Design and UI agents
-├── workflow/   # Workflow automation agents
-└── docs/       # Documentation agents
+├── review/     # Code review agents (11 agents)
+├── research/   # Research and analysis agents (4 agents)
+└── workflow/   # Workflow automation agents (3 agents)
 
 commands/
 ├── workflows/  # Core workflow commands (workflows:plan, workflows:review, etc.)
 └── *.md        # Utility commands
 
 skills/
-└── *.md        # All skills at root level
+└── */          # All skills in subdirectories
 ```
+
+## Target Stack
+
+This plugin is optimized for:
+- **Backend**: Convex
+- **Frontend**: Next.js, Astro, React, Vite
+- **Languages**: TypeScript, JavaScript
 
 ## Command Naming Convention
 
@@ -85,6 +90,10 @@ grep -E '^description:' skills/*/SKILL.md | grep -v 'This skill'
 # Should return nothing if all use third person
 ```
 
-## Documentation
+## Component Counts
 
-See `docs/solutions/plugin-versioning-requirements.md` for detailed versioning workflow.
+Current counts (verify before committing):
+- **Agents**: 18
+- **Commands**: 16
+- **Skills**: 8
+- **MCP Servers**: 2

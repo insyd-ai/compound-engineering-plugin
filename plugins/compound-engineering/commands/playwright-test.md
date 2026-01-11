@@ -21,7 +21,7 @@ This command tests affected pages in a real browser, catching issues that unit t
 ## Prerequisites
 
 <requirements>
-- Local development server running (e.g., `bin/dev`, `rails server`)
+- Local development server running (e.g., `bun run dev`, `bun dev`)
 - Playwright MCP server connected
 - Git repository with changes to test
 </requirements>
@@ -87,8 +87,8 @@ If server is not running, inform user:
 **Server not running**
 
 Please start your development server:
-- Rails: `bin/dev` or `rails server`
-- Node: `npm run dev`
+- Next.js: `bun run dev` or `bun dev`
+- Astro: `bun run dev` or `bun astro dev`
 
 Then run `/playwright-test` again.
 ```

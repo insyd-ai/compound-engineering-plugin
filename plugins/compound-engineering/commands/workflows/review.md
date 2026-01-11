@@ -2,6 +2,7 @@
 name: workflows:review
 description: Perform exhaustive code reviews using multi-agent analysis, ultra-thinking, and worktrees
 argument-hint: "[PR number, GitHub URL, branch name, or latest]"
+model: sonnet
 ---
 
 # Review Command
@@ -54,10 +55,8 @@ Ensure that the code is ready for analysis (either in worktree or on current bra
 
 Run ALL or most of these agents at the same time:
 
-1. Task kieran-rails-reviewer(PR content)
-2. Task dhh-rails-reviewer(PR title)
-3. If turbo is used: Task rails-turbo-expert(PR content)
-4. Task git-history-analyzer(PR content)
+1. Task kieran-typescript-reviewer(PR content)
+2. Task git-history-analyzer(PR content)
 5. Task dependency-detective(PR content)
 6. Task pattern-recognition-specialist(PR content)
 7. Task architecture-strategist(PR content)
@@ -76,21 +75,21 @@ Run ALL or most of these agents at the same time:
 
 These agents are run ONLY when the PR matches specific criteria. Check the PR files list to determine if they apply:
 
-**If PR contains database migrations (db/migrate/*.rb files) or data backfills:**
+**If PR contains database migrations or data backfills:**
 
 14. Task data-migration-expert(PR content) - Validates ID mappings match production, checks for swapped values, verifies rollback safety
-15. Task deployment-verification-agent(PR content) - Creates Go/No-Go deployment checklist with SQL verification queries
+15. Task deployment-verification-agent(PR content) - Creates Go/No-Go deployment checklist with verification queries
 
 **When to run migration agents:**
-- PR includes files matching `db/migrate/*.rb`
+- PR includes database migration files
 - PR modifies columns that store IDs, enums, or mappings
-- PR includes data backfill scripts or rake tasks
-- PR changes how data is read/written (e.g., changing from FK to string column)
+- PR includes data backfill scripts
+- PR changes how data is read/written
 - PR title/body mentions: migration, backfill, data transformation, ID mapping
 
 **What these agents check:**
 - `data-migration-expert`: Verifies hard-coded mappings match production reality (prevents swapped IDs), checks for orphaned associations, validates dual-write patterns
-- `deployment-verification-agent`: Produces executable pre/post-deploy checklists with SQL queries, rollback procedures, and monitoring plans
+- `deployment-verification-agent`: Produces executable pre/post-deploy checklists with verification queries, rollback procedures, and monitoring plans
 
 </conditional_agents>
 
@@ -189,7 +188,33 @@ Complete system context map with component interactions
 - Collaboration patterns
 - Mentoring opportunities
 
-### 4. Simplification and Minimalism Review
+### 4. Functional Test Validation
+
+<functional_test_check>
+
+If functional test cases exist in `docs/test-cases/`:
+
+1. **Read Relevant Test Cases**:
+   - Find test cases related to the PR's modified features
+   - Extract success criteria from the test cases
+
+2. **Verify Implementation Meets Success Criteria**:
+   - For each success criterion, check if the PR satisfies it
+   - Verify behavioral specs are correctly implemented
+   - Check edge cases are handled as specified
+
+3. **Report Gaps**:
+   - Any unmet success criteria → P1 finding
+   - Missing edge case handling → P2 finding
+   - Behavioral spec mismatches → P1 finding
+
+4. **If No Test Cases Exist**:
+   - Note as advisory: "No functional test cases found for this feature"
+   - Recommend creating test cases: `/test:functional <feature-name>`
+
+</functional_test_check>
+
+### 5. Simplification and Minimalism Review
 
 Run the Task code-simplicity-reviewer() to see if we can simplify the code.
 
@@ -331,7 +356,7 @@ Examples:
 - `p2` - Important (should fix, architectural/performance)
 - `p3` - Nice-to-have (enhancements, cleanup)
 
-**Tagging:** Always add `code-review` tag, plus: `security`, `performance`, `architecture`, `rails`, `quality`, etc.
+**Tagging:** Always add `code-review` tag, plus: `security`, `performance`, `architecture`, `quality`, etc.
 
 #### Step 3: Summary Report
 
@@ -367,7 +392,7 @@ After creating all todo files, present comprehensive summary:
 
 ### Review Agents Used:
 
-- kieran-rails-reviewer
+- kieran-typescript-reviewer
 - security-sentinel
 - performance-oracle
 - architecture-strategist
@@ -427,48 +452,19 @@ After creating all todo files, present comprehensive summary:
 
 ### 7. End-to-End Testing (Optional)
 
-<detect_project_type>
-
-**First, detect the project type from PR files:**
-
-| Indicator | Project Type |
-|-----------|--------------|
-| `*.xcodeproj`, `*.xcworkspace`, `Package.swift` (iOS) | iOS/macOS |
-| `Gemfile`, `package.json`, `app/views/*`, `*.html.*` | Web |
-| Both iOS files AND web files | Hybrid (test both) |
-
-</detect_project_type>
-
 <offer_testing>
 
-After presenting the Summary Report, offer appropriate testing based on project type:
+After presenting the Summary Report, offer browser testing:
 
-**For Web Projects:**
 ```markdown
 **"Want to run Playwright browser tests on the affected pages?"**
 1. Yes - run `/playwright-test`
 2. No - skip
 ```
 
-**For iOS Projects:**
-```markdown
-**"Want to run Xcode simulator tests on the app?"**
-1. Yes - run `/xcode-test`
-2. No - skip
-```
-
-**For Hybrid Projects (e.g., Rails + Hotwire Native):**
-```markdown
-**"Want to run end-to-end tests?"**
-1. Web only - run `/playwright-test`
-2. iOS only - run `/xcode-test`
-3. Both - run both commands
-4. No - skip
-```
-
 </offer_testing>
 
-#### If User Accepts Web Testing:
+#### If User Accepts Testing:
 
 Spawn a subagent to run Playwright tests (preserves main context):
 
@@ -486,27 +482,6 @@ The subagent will:
 7. Fix and retry until all tests pass
 
 **Standalone:** `/playwright-test [PR number]`
-
-#### If User Accepts iOS Testing:
-
-Spawn a subagent to run Xcode tests (preserves main context):
-
-```
-Task general-purpose("Run /xcode-test for scheme [name]. Build for simulator, install, launch, take screenshots, check for crashes.")
-```
-
-The subagent will:
-1. Verify XcodeBuildMCP is installed
-2. Discover project and schemes
-3. Build for iOS Simulator
-4. Install and launch app
-5. Take screenshots of key screens
-6. Capture console logs for errors
-7. Pause for human verification (Sign in with Apple, push, IAP)
-8. Create P1 todos for any failures
-9. Fix and retry until all tests pass
-
-**Standalone:** `/xcode-test [scheme]`
 
 ### Important: P1 Findings Block Merge
 

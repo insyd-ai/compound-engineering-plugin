@@ -11,8 +11,8 @@
   "plugins": [
     {
       "name": "insyd-engineering",
-      "description": "Engineering plugin for modern JavaScript/TypeScript development workflows. Includes 21 specialized agents, 20 commands, and 11 skills for spec writing (PRD+TDD), functional testing, code review, refactoring, and codebase understanding. Optimized for Convex, Next.js, Astro, React, and Vite projects.",
-      "version": "2.0.0",
+      "description": "Engineering plugin for modern JavaScript/TypeScript development workflows. Includes 22 specialized agents, 20 commands, 11 skills, and 7 MCP servers for spec writing (PRD+TDD), functional testing, code review, refactoring, and codebase understanding. Optimized for Convex, Next.js, Astro, React, and Vite projects.",
+      "version": "2.1.0",
       "author": {
         "name": "Insyd-AI",
         "url": "https://github.com/insyd-ai"
@@ -33,6 +33,45 @@
         "engineering"
       ],
       "source": "./plugins/compound-engineering"
+    },
+    {
+      "name": "claude-mem",
+      "description": "Memory and context persistence plugin. Captures Claude sessions, compresses with AI, and injects relevant context into future sessions.",
+      "version": "1.0.0",
+      "author": {
+        "name": "thedotmack",
+        "url": "https://github.com/thedotmack"
+      },
+      "homepage": "https://github.com/thedotmack/claude-mem",
+      "tags": [
+        "memory",
+        "context",
+        "persistence",
+        "session-management"
+      ],
+      "source": "./plugins/claude-mem",
+      "external": true,
+      "externalSource": "thedotmack/claude-mem"
+    },
+    {
+      "name": "plannotator",
+      "description": "Interactive plan review tool for AI coding agents. Visual annotation with markup tools, plan management, approval workflows, and team collaboration. Auto-saves to Obsidian and Bear Notes.",
+      "version": "0.4.15",
+      "author": {
+        "name": "backnotprop",
+        "url": "https://github.com/backnotprop"
+      },
+      "homepage": "https://plannotator.ai",
+      "tags": [
+        "planning",
+        "annotation",
+        "visual-review",
+        "collaboration",
+        "obsidian"
+      ],
+      "source": "./plugins/plannotator",
+      "external": true,
+      "externalSource": "backnotprop/plannotator"
     }
   ]
 }

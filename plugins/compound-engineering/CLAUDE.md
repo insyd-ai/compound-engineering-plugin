@@ -28,9 +28,9 @@ Before committing ANY changes:
 
 ```
 agents/
-├── review/     # Code review agents (11 agents)
+├── review/     # Code review agents (12 agents)
 ├── research/   # Research and analysis agents (4 agents)
-└── workflow/   # Workflow automation agents (3 agents)
+└── workflow/   # Workflow automation agents (6 agents)
 
 commands/
 ├── workflows/  # Core workflow commands (workflows:plan, workflows:review, etc.)
@@ -93,7 +93,7 @@ grep -E '^description:' skills/*/SKILL.md | grep -v 'This skill'
 ## Component Counts
 
 Current counts (verify before committing):
-- **Agents**: 18
-- **Commands**: 16
-- **Skills**: 8
-- **MCP Servers**: 2
+- **Agents**: 22
+- **Commands**: 20
+- **Skills**: 11
+- **MCP Servers**: 7

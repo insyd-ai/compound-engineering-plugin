@@ -1,0 +1,24 @@
+{
+  "name": "claude-mem",
+  "version": "1.0.0",
+  "description": "Automatic context capture and injection plugin. Captures everything Claude does during coding sessions, compresses it with AI, and injects relevant context into future sessions.",
+  "author": {
+    "name": "thedotmack",
+    "url": "https://github.com/thedotmack"
+  },
+  "homepage": "https://github.com/thedotmack/claude-mem",
+  "repository": "https://github.com/thedotmack/claude-mem",
+  "license": "MIT",
+  "keywords": [
+    "memory",
+    "context",
+    "session",
+    "persistence",
+    "ai-compression"
+  ],
+  "externalPlugin": {
+    "type": "marketplace",
+    "source": "thedotmack/claude-mem",
+    "installCommand": "/plugin marketplace add thedotmack/claude-mem && /plugin install claude-mem"
+  }
+}

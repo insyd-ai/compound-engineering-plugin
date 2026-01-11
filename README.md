@@ -44,15 +44,66 @@ Plan → Work → Review → Compound → Repeat
 
 | Type | Count |
 |------|-------|
-| Agents | 18 |
-| Commands | 16 |
-| Skills | 8 |
-| MCP Servers | 2 |
+| Agents | 22 |
+| Commands | 20 |
+| Skills | 11 |
+| MCP Servers | 7 |
 
 ## Learn More
 
 - [Full component reference](plugins/compound-engineering/README.md)
 - [Changelog](plugins/compound-engineering/CHANGELOG.md)
+- [MCP Setup Guide](plugins/compound-engineering/docs/MCP-SETUP.md)
+
+## Using as a Git Submodule
+
+### Add to Your Project
+
+```bash
+# Add as submodule in your project
+git submodule add https://github.com/insyd-ai/compound-engineering-plugin.git .claude/plugins/insyd
+
+# Initialize and update
+git submodule update --init --recursive
+```
+
+### Configure Claude Code
+
+Create/update `.claude/settings.json` in your project:
+
+```json
+{
+  "plugins": {
+    "marketplaces": ["./.claude/plugins/insyd"]
+  }
+}
+```
+
+### Install the Plugin
+
+```bash
+claude plugin install insyd-engineering
+```
+
+### Install External Plugins (Optional)
+
+For claude-mem memory features:
+
+```bash
+/plugin marketplace add thedotmack/claude-mem
+/plugin install claude-mem
+```
+
+### Environment Variables
+
+Set these for full MCP functionality:
+
+```bash
+# Required for GitHub MCP
+export GITHUB_PAT="your_github_pat"
+
+# Linear and Figma use OAuth - authenticate via /mcp command
+```
 
 ## Credits
 

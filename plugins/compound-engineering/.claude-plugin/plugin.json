@@ -1,7 +1,7 @@
 {
   "name": "insyd-ai-engineering",
-  "version": "2.0.0",
-  "description": "Engineering plugin for modern JavaScript/TypeScript development. 21 agents, 20 commands, 11 skills, 2 MCP servers for spec writing (PRD+TDD), functional testing, code review, refactoring, and codebase understanding.",
+  "version": "2.1.0",
+  "description": "Engineering plugin for modern JavaScript/TypeScript development. 22 agents, 20 commands, 11 skills, 7 MCP servers for spec writing (PRD+TDD), functional testing, code review, refactoring, and codebase understanding.",
   "author": {
     "name": "Insyd-AI",
     "url": "https://github.com/insyd-ai"
@@ -36,6 +36,35 @@
     "context7": {
       "type": "http",
       "url": "https://mcp.context7.com/mcp"
+    },
+    "convex": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["convex", "mcp", "start"],
+      "env": {}
+    },
+    "linear": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"],
+      "env": {}
+    },
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${GITHUB_PAT}"
+      }
+    },
+    "figma": {
+      "type": "http",
+      "url": "https://mcp.figma.com/mcp"
+    },
+    "shadcn": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["shadcn@latest", "mcp"],
+      "env": {}
     }
   }
 }

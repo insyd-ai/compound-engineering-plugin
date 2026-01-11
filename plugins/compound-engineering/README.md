@@ -21,22 +21,23 @@ This plugin is designed for 8 core engineering workflows:
 
 | Component | Count |
 |-----------|-------|
-| Agents | 21 |
+| Agents | 22 |
 | Commands | 20 |
 | Skills | 11 |
-| MCP Servers | 2 |
+| MCP Servers | 7 |
 
 ## Agents
 
 Agents are organized into categories for easier discovery.
 
-### Review (11)
+### Review (12)
 
 | Agent | Description |
 |-------|-------------|
 | `agent-native-reviewer` | Verify features are agent-native (action + context parity) |
 | `architecture-strategist` | Analyze architectural decisions and compliance |
 | `code-simplicity-reviewer` | Final pass for simplicity and minimalism |
+| `code-simplifier` | Simplify and refactor code for clarity and maintainability |
 | `data-integrity-guardian` | Database migrations and data integrity |
 | `data-migration-expert` | Validate ID mappings match production, check for swapped values |
 | `deployment-verification-agent` | Create Go/No-Go deployment checklists for risky data changes |
@@ -140,12 +141,26 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 
 ## MCP Servers
 
-| Server | Description |
-|--------|-------------|
-| `pw` | Browser automation via `@playwright/mcp` |
-| `context7` | Framework documentation lookup via Context7 |
+| Server | Type | Description |
+|--------|------|-------------|
+| `pw` | stdio | Browser automation via `@playwright/mcp` |
+| `context7` | http | Framework documentation lookup (100+ libraries) |
+| `convex` | stdio | Convex backend operations |
+| `linear` | stdio | Linear issue tracking integration |
+| `github` | http | GitHub repository operations |
+| `figma` | http | Figma design extraction |
+| `shadcn` | stdio | shadcn/ui component registry |
 
-### Playwright
+### Authentication Required
+
+Some MCP servers require authentication:
+- **GitHub**: Set `GITHUB_PAT` environment variable
+- **Linear**: Complete OAuth via `/mcp` command
+- **Figma**: Complete OAuth via `/mcp` command
+
+See [MCP-SETUP.md](docs/MCP-SETUP.md) for detailed setup instructions.
+
+### Playwright (`pw`)
 
 **Tools provided:**
 - `browser_navigate` - Navigate to URLs
@@ -162,6 +177,41 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 - `get-library-docs` - Get documentation for a specific library
 
 Supports 100+ frameworks including React, Next.js, Vue, Astro, Convex, and more.
+
+### Convex
+
+**Tools provided:**
+- Query deployments and tables
+- Execute Convex functions
+- Manage backend resources
+
+### Linear
+
+**Tools provided:**
+- Create, update, and search issues
+- Manage projects and cycles
+- Track team activity
+
+### GitHub
+
+**Tools provided:**
+- Repository operations (PRs, issues)
+- Code search across repositories
+- Review and comment on changes
+
+### Figma
+
+**Tools provided:**
+- Extract designs from Figma files
+- Convert designs to code
+- Access component libraries
+
+### shadcn
+
+**Tools provided:**
+- Browse component registry
+- Search for components
+- Install components to project
 
 MCP servers start automatically when the plugin is enabled.
 

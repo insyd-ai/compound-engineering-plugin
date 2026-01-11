@@ -1,3 +1,9 @@
 .DS_Store
 *.log
 node_modules/
+
+# Claude Code local settings (user-specific, auto-generated)
+.claude/settings.local.json
+
+# Windows artifacts
+nul

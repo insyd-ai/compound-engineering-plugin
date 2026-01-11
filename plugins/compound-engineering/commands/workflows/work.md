@@ -87,23 +87,45 @@ This command takes a work document (plan, specification, or todo file) and execu
    - Follow project coding standards (see CLAUDE.md)
    - When in doubt, grep for similar implementations
 
-3. **Test Continuously**
+3. **Convex Integration** (if applicable)
+
+   When working with Convex backend:
+
+   - Check `convex/` directory for existing patterns
+   - Follow existing mutation/query naming conventions
+   - Use Convex schema types for type safety
+   - Reference Convex documentation via Context7 MCP:
+     ```
+     mcp__context7__resolve-library-id({ libraryName: "convex" })
+     mcp__context7__get-library-docs({ libraryId: "<convex-id>", topic: "<topic>" })
+     ```
+
+   **Common Convex Patterns**:
+   - Queries: Read-only data fetching
+   - Mutations: Data modifications
+   - Actions: External API calls, side effects
+   - Scheduled functions: Background jobs
+
+4. **Check Functional Test Cases**
+
+   Before implementing, check if functional test cases exist:
+   ```bash
+   ls docs/test-cases/
+   ```
+
+   If test cases exist for this feature:
+   - Read the test cases to understand expected behavior
+   - Use success criteria as implementation guide
+   - Verify each criterion is met as you implement
+
+5. **Test Continuously**
 
    - Run relevant tests after each significant change
    - Don't wait until the end to test
    - Fix failures immediately
    - Add new tests for new functionality
 
-4. **Figma Design Sync** (if applicable)
-
-   For UI work with Figma designs:
-
-   - Implement components following design specs
-   - Use figma-design-sync agent iteratively to compare
-   - Fix visual differences identified
-   - Repeat until implementation matches design
-
-5. **Track Progress**
+6. **Track Progress**
    - Keep TodoWrite updated as you complete tasks
    - Note any blockers or unexpected discoveries
    - Create new tasks if scope expands
@@ -117,10 +139,11 @@ This command takes a work document (plan, specification, or todo file) and execu
 
    ```bash
    # Run full test suite
-   bin/rails test
+   bun test
+   # or: bunx vitest, etc.
 
-   # Run linting (per CLAUDE.md)
-   # Use linting-agent before pushing to origin
+   # Run linting
+   bun run lint
    ```
 
 2. **Consider Reviewer Agents** (Optional)
@@ -128,16 +151,15 @@ This command takes a work document (plan, specification, or todo file) and execu
    Use for complex, risky, or large changes:
 
    - **code-simplicity-reviewer**: Check for unnecessary complexity
-   - **kieran-rails-reviewer**: Verify Rails conventions (Rails projects)
+   - **kieran-typescript-reviewer**: Verify TypeScript conventions
    - **performance-oracle**: Check for performance issues
    - **security-sentinel**: Scan for security vulnerabilities
-   - **cora-test-reviewer**: Review test quality (CORA projects)
 
    Run reviewers in parallel with Task tool:
 
    ```
    Task(code-simplicity-reviewer): "Review changes for simplicity"
-   Task(kieran-rails-reviewer): "Check Rails conventions"
+   Task(kieran-typescript-reviewer): "Check TypeScript conventions"
    ```
 
    Present findings to user and address critical issues.
@@ -147,7 +169,6 @@ This command takes a work document (plan, specification, or todo file) and execu
    - All tests pass
    - Linting passes
    - Code follows existing patterns
-   - Figma designs match (if applicable)
    - No console errors or warnings
 
 ### Phase 4: Ship It
@@ -198,7 +219,7 @@ This command takes a work document (plan, specification, or todo file) and execu
    **What to capture:**
    - **New screens**: Screenshot of the new UI
    - **Modified screens**: Before AND after screenshots
-   - **Design implementation**: Screenshot showing Figma design match
+   - **Design implementation**: Screenshot showing design specs match
 
    **IMPORTANT**: Always include uploaded image URLs in PR description. This provides visual context for reviewers and documents the change.
 
@@ -221,9 +242,6 @@ This command takes a work document (plan, specification, or todo file) and execu
    | Before | After |
    |--------|-------|
    | ![before](URL) | ![after](URL) |
-
-   ## Figma Design
-   [Link if applicable]
 
    🤖 Generated with [Claude Code](https://claude.com/claude-code)
    EOF
@@ -277,10 +295,9 @@ Before creating PR, verify:
 
 - [ ] All clarifying questions asked and answered
 - [ ] All TodoWrite tasks marked completed
-- [ ] Tests pass (run `bin/rails test`)
-- [ ] Linting passes (use linting-agent)
+- [ ] Tests pass (run `bun test` or equivalent)
+- [ ] Linting passes (run `bun run lint`)
 - [ ] Code follows existing patterns
-- [ ] Figma designs match implementation (if applicable)
 - [ ] Before/after screenshots captured and uploaded (for UI changes)
 - [ ] Commit messages follow conventional format
 - [ ] PR description includes summary, testing notes, and screenshots

@@ -46,7 +46,7 @@ Report: "This skill is primarily [type]-based. I'll verify using [method]."
 Scan skill content and extract:
 
 **CLI Tools mentioned:**
-- Tool names (xcodebuild, swift, npm, etc.)
+- Tool names (xcodebuild, swift, bun, etc.)
 - Specific flags/options documented
 - Expected output patterns
 

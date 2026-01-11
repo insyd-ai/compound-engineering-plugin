@@ -102,6 +102,47 @@ When using search tools:
 - For file discovery: `find . -name 'pattern' -type f`
 - Check multiple variations of common file names
 
+**Large Codebase Navigation:**
+
+For large or complex codebases, use these strategies:
+
+1. **Indexing Strategy**
+   - Use Glob for file discovery patterns
+   - Use Grep for content pattern matching
+   - Build mental map of directory structure
+   - Identify entry points (main files, index files, app.ts, etc.)
+
+2. **Architecture Mapping**
+   - Identify architectural layers (routes, controllers, services, models)
+   - Map data flow from request to response
+   - Document API boundaries between modules
+   - Create dependency graphs using mermaid:
+     ```mermaid
+     flowchart TD
+       A[Routes] --> B[Controllers]
+       B --> C[Services]
+       C --> D[Repositories]
+       D --> E[(Database)]
+     ```
+
+3. **Code Path Tracing**
+   - Follow imports/requires from entry points
+   - Trace function calls through the stack
+   - Document side effects and external calls
+   - Map database operations to business logic
+
+4. **Dependency Analysis**
+   - Check package.json for external dependencies
+   - Identify internal module dependencies
+   - Document shared utilities and helpers
+   - Note any circular dependencies
+
+5. **Convention Discovery**
+   - Check file naming patterns (camelCase, kebab-case, etc.)
+   - Identify import/export conventions
+   - Document error handling patterns
+   - Note logging and monitoring approaches
+
 **Important Considerations:**
 
 - Respect any CLAUDE.md or project-specific instructions found

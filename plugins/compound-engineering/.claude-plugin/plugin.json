@@ -1,34 +1,36 @@
 {
-  "name": "compound-engineering",
-  "version": "2.23.1",
-  "description": "AI-powered development tools. 27 agents, 21 commands, 13 skills, 2 MCP servers for code review, research, design, and workflow automation.",
+  "name": "insyd-ai-engineering",
+  "version": "2.0.0",
+  "description": "Engineering plugin for modern JavaScript/TypeScript development. 21 agents, 20 commands, 11 skills, 2 MCP servers for spec writing (PRD+TDD), functional testing, code review, refactoring, and codebase understanding.",
   "author": {
-    "name": "Kieran Klaassen",
-    "email": "kieran@every.to",
-    "url": "https://github.com/kieranklaassen"
+    "name": "Insyd-AI",
+    "url": "https://github.com/insyd-ai"
   },
-  "homepage": "https://every.to/source-code/my-ai-had-already-fixed-the-code-before-i-saw-it",
-  "repository": "https://github.com/EveryInc/every-marketplace",
+  "homepage": "https://github.com/insyd-ai/compound-engineering-plugin",
+  "repository": "https://github.com/insyd-ai/compound-engineering-plugin",
   "license": "MIT",
   "keywords": [
-    "ai-powered",
-    "compound-engineering",
-    "workflow-automation",
-    "code-review",
-    "rails",
-    "ruby",
-    "python",
     "typescript",
-    "knowledge-management",
-    "image-generation",
+    "javascript",
+    "nextjs",
+    "convex",
+    "astro",
+    "react",
+    "vite",
+    "testing",
+    "code-review",
+    "refactoring",
+    "spec-writing",
     "playwright",
-    "browser-automation"
+    "browser-automation",
+    "engineering",
+    "insyd-ai"
   ],
   "mcpServers": {
     "pw": {
       "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@playwright/mcp@latest"],
+      "command": "bunx",
+      "args": ["@playwright/mcp@latest"],
       "env": {}
     },
     "context7": {

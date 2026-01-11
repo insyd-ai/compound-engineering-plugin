@@ -1,0 +1,32 @@
+{
+  "name": "plannotator",
+  "version": "0.4.15",
+  "description": "Interactive plan review tool for AI coding agents. Enables visual annotation, markup tools (pen, arrow, circle), plan management (delete, insert, replace, comment), approval workflows, and team collaboration. Auto-saves approved plans to Obsidian and Bear Notes.",
+  "author": {
+    "name": "backnotprop",
+    "url": "https://github.com/backnotprop"
+  },
+  "homepage": "https://plannotator.ai",
+  "repository": "https://github.com/backnotprop/plannotator",
+  "license": "BSL-1.1",
+  "keywords": [
+    "planning",
+    "annotation",
+    "visual-review",
+    "collaboration",
+    "obsidian",
+    "bear-notes",
+    "claude-code",
+    "opencode"
+  ],
+  "externalPlugin": {
+    "type": "marketplace",
+    "source": "backnotprop/plannotator",
+    "installCommand": "/plugin marketplace add backnotprop/plannotator && /plugin install plannotator@plannotator",
+    "preInstall": {
+      "macOS": "curl -fsSL https://plannotator.ai/install.sh | bash",
+      "linux": "curl -fsSL https://plannotator.ai/install.sh | bash",
+      "windows": "irm https://plannotator.ai/install.ps1 | iex"
+    }
+  }
+}

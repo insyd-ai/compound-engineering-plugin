@@ -5,6 +5,32 @@ All notable changes to the Insyd Engineering plugin will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-01-11
+
+### Added
+
+**New MCP Servers (5):**
+- `convex` - Convex backend operations (query deployments, manage tables, execute functions)
+- `linear` - Linear issue tracking integration (create, update, search issues)
+- `github` - GitHub repository operations (PRs, issues, code search)
+- `figma` - Figma design extraction (convert designs to code)
+- `shadcn` - shadcn/ui component registry (browse, search, install components)
+
+**New Agents (1):**
+- `code-simplifier` - Code simplification and refactoring specialist
+
+**New Documentation:**
+- `docs/MCP-SETUP.md` - Comprehensive MCP authentication and setup guide
+
+**New Plugin Reference:**
+- `claude-mem` - External plugin reference for session memory and context persistence
+
+### Changed
+- Updated MCP server count from 2 to 7
+- Updated agent count from 21 to 22
+
+---
+
 ## [2.0.0] - 2026-01-11
 
 ### Added

@@ -11,17 +11,25 @@ insyd-engineering-plugin/
 ├── .claude-plugin/
 │   └── marketplace.json          # Marketplace catalog
 └── plugins/
-    └── compound-engineering/     # The plugin
-        ├── .claude-plugin/
-        │   └── plugin.json       # Plugin metadata
-        ├── agents/               # 18 specialized AI agents
-        │   ├── review/           # Code review agents (11)
-        │   ├── research/         # Research agents (4)
-        │   └── workflow/         # Workflow agents (3)
-        ├── commands/             # 16 slash commands
-        ├── skills/               # 8 skills
-        ├── README.md             # Plugin documentation
-        └── CHANGELOG.md          # Version history
+    ├── compound-engineering/     # The plugin
+    │   ├── .claude-plugin/
+    │   │   └── plugin.json       # Plugin metadata
+    │   ├── agents/               # 22 specialized AI agents
+    │   │   ├── review/           # Code review agents (12)
+    │   │   ├── research/         # Research agents (4)
+    │   │   └── workflow/         # Workflow agents (6)
+    │   ├── commands/             # 20 slash commands
+    │   ├── skills/               # 11 skills
+    │   ├── docs/                 # Documentation
+    │   │   └── MCP-SETUP.md      # MCP setup guide
+    │   ├── README.md             # Plugin documentation
+    │   └── CHANGELOG.md          # Version history
+    ├── claude-mem/               # External plugin reference
+    │   └── .claude-plugin/
+    │       └── plugin.json       # Plugin metadata
+    └── plannotator/              # External plugin reference
+        └── .claude-plugin/
+            └── plugin.json       # Plugin metadata
 ```
 
 ## Target Stack
@@ -171,10 +179,10 @@ cat plugins/compound-engineering/.claude-plugin/plugin.json | jq .
 ## Component Counts
 
 Current counts:
-- **Agents**: 18
-- **Commands**: 16
-- **Skills**: 8
-- **MCP Servers**: 2
+- **Agents**: 22
+- **Commands**: 20
+- **Skills**: 11
+- **MCP Servers**: 7
 
 ## Resources
 

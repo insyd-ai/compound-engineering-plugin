@@ -11,6 +11,7 @@
       "Bash(dir /s \"C:\\\\Users\\\\saara\\\\insyd-labs\\\\compound-engineering-plugin\\\\plugins\\\\compound-engineering\\\\agents\")",
       "Bash(done)",
       "Bash(python -m json.tool:*)"
+      "Bash(test:*)"
     ]
   }
 }

@@ -49,9 +49,7 @@
         "persistence",
         "session-management"
       ],
-      "source": "./plugins/claude-mem",
-      "external": true,
-      "externalSource": "thedotmack/claude-mem"
+      "source": "./plugins/claude-mem"
     },
     {
       "name": "plannotator",
@@ -69,9 +67,7 @@
         "collaboration",
         "obsidian"
       ],
-      "source": "./plugins/plannotator",
-      "external": true,
-      "externalSource": "backnotprop/plannotator"
+      "source": "./plugins/plannotator"
     }
   ]
 }

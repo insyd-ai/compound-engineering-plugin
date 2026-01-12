@@ -9,11 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-**New MCP Servers (5):**
+**New MCP Servers (4):**
 - `convex` - Convex backend operations (query deployments, manage tables, execute functions)
 - `linear` - Linear issue tracking integration (create, update, search issues)
 - `github` - GitHub repository operations (PRs, issues, code search)
-- `figma` - Figma design extraction (convert designs to code)
 - `shadcn` - shadcn/ui component registry (browse, search, install components)
 
 **New Agents (1):**

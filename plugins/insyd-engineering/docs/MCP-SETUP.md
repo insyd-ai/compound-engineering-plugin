@@ -11,7 +11,6 @@ This plugin includes 7 MCP (Model Context Protocol) servers for enhanced develop
 | `convex` | stdio | Convex backend operations |
 | `linear` | stdio | Linear issue tracking |
 | `github` | http | GitHub repository operations |
-| `figma` | http | Figma design extraction |
 | `shadcn` | stdio | shadcn/ui component registry |
 
 ## Authentication Setup
@@ -36,14 +35,6 @@ Uses OAuth authentication:
 3. Click "Authenticate" and complete OAuth flow
 4. Grant requested permissions
 
-### Figma MCP
-
-Uses OAuth authentication:
-
-1. After plugin installation, run `/mcp` in Claude Code
-2. Select "figma" from the list
-3. Click "Authenticate" and complete OAuth flow
-4. Grant access when prompted
 
 ## Verification
 
@@ -57,7 +48,7 @@ Or use `/mcp` in Claude Code to see connection status.
 
 ## Troubleshooting
 
-### Linear/Figma OAuth Issues
+### Linear OAuth Issues
 
 ```bash
 # Clear cached authentication

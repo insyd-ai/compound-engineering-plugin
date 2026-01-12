@@ -4,7 +4,7 @@
 
 **IMPORTANT**: Every change to this plugin MUST include updates to all three files:
 
-1. **`.claude-plugin/plugin.json`** - Bump version using semver
+1. **`plugin.json`** - Bump version using semver
 2. **`CHANGELOG.md`** - Document changes using Keep a Changelog format
 3. **`README.md`** - Verify/update component counts and tables
 
@@ -18,7 +18,7 @@
 
 Before committing ANY changes:
 
-- [ ] Version bumped in `.claude-plugin/plugin.json`
+- [ ] Version bumped in `plugin.json`
 - [ ] CHANGELOG.md updated with changes
 - [ ] README.md component counts verified
 - [ ] README.md tables accurate (agents, commands, skills)

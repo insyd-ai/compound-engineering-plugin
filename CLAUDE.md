@@ -1,35 +1,56 @@
 # Insyd Engineering Plugin - Claude Code Plugin
 
-This repository is a Claude Code plugin that provides AI-powered engineering tools for JavaScript/TypeScript development workflows.
+This repository is a Claude Code plugin marketplace that provides AI-powered engineering tools for JavaScript/TypeScript development workflows.
 
 > Forked from [compound-engineering-plugin](https://github.com/EveryInc/every-marketplace) by Every Inc.
 
 ## Repository Structure
 
 ```
-insyd-engineering-plugin/
+compound-engineering-plugin/
 ├── .claude-plugin/
-│   └── marketplace.json          # Marketplace catalog
-└── plugins/
-    ├── compound-engineering/     # The plugin
-    │   ├── .claude-plugin/
-    │   │   └── plugin.json       # Plugin metadata
-    │   ├── agents/               # 22 specialized AI agents
-    │   │   ├── review/           # Code review agents (12)
-    │   │   ├── research/         # Research agents (4)
-    │   │   └── workflow/         # Workflow agents (6)
-    │   ├── commands/             # 20 slash commands
-    │   ├── skills/               # 11 skills
-    │   ├── docs/                 # Documentation
-    │   │   └── MCP-SETUP.md      # MCP setup guide
-    │   ├── README.md             # Plugin documentation
-    │   └── CHANGELOG.md          # Version history
-    ├── claude-mem/               # External plugin reference
-    │   └── .claude-plugin/
-    │       └── plugin.json       # Plugin metadata
-    └── plannotator/              # External plugin reference
-        └── .claude-plugin/
-            └── plugin.json       # Plugin metadata
+│   └── marketplace.json              # Marketplace catalog
+├── plugins/
+│   ├── insyd-engineering/            # Main plugin
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json           # Plugin metadata
+│   │   ├── agents/                   # 22 specialized AI agents
+│   │   │   ├── review/               # Code review agents (12)
+│   │   │   ├── research/             # Research agents (4)
+│   │   │   └── workflow/             # Workflow agents (6)
+│   │   ├── commands/                 # 20 slash commands
+│   │   ├── skills/                   # 11 skills
+│   │   ├── docs/                     # Documentation
+│   │   │   └── MCP-SETUP.md          # MCP setup guide
+│   │   ├── README.md                 # Plugin documentation
+│   │   └── CHANGELOG.md              # Version history
+│   ├── claude-mem/                   # External plugin reference
+│   │   └── .claude-plugin/
+│   │       └── plugin.json
+│   └── plannotator/                  # External plugin reference
+│       └── .claude-plugin/
+│           └── plugin.json
+└── CLAUDE.md
+```
+
+## Using as a Git-based Marketplace
+
+Add this marketplace to any project's `.claude/settings.json`:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "insyd-plugins": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/insyd-ai/compound-engineering-plugin.git"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "insyd-engineering@insyd-plugins": true
+  }
+}
 ```
 
 ## Target Stack
@@ -58,7 +79,8 @@ This plugin is optimized for:
 2. Add plugin structure:
    ```
    plugins/new-plugin-name/
-   ├── .claude-plugin/plugin.json
+   ├── .claude-plugin/
+   │   └── plugin.json
    ├── agents/
    ├── commands/
    └── README.md
@@ -66,7 +88,7 @@ This plugin is optimized for:
 3. Update `.claude-plugin/marketplace.json` to include the new plugin
 4. Test locally before committing
 
-### Updating the Compounding Engineering Plugin
+### Updating the Insyd Engineering Plugin
 
 When agents, commands, or skills are added/removed:
 
@@ -74,37 +96,31 @@ When agents, commands, or skills are added/removed:
 
 ```bash
 # Count agents (in subdirectories)
-find plugins/compound-engineering/agents -name "*.md" | wc -l
+find plugins/insyd-engineering/agents -name "*.md" | wc -l
 
 # Count commands
-ls plugins/compound-engineering/commands/*.md plugins/compound-engineering/commands/*/*.md 2>/dev/null | wc -l
+ls plugins/insyd-engineering/commands/*.md plugins/insyd-engineering/commands/*/*.md 2>/dev/null | wc -l
 
 # Count skills
-ls -d plugins/compound-engineering/skills/*/ 2>/dev/null | wc -l
+ls -d plugins/insyd-engineering/skills/*/ 2>/dev/null | wc -l
 ```
 
-#### 2. Update description strings
 
-Update counts in:
-- [ ] `plugins/compound-engineering/.claude-plugin/plugin.json` → `description`
-- [ ] `.claude-plugin/marketplace.json` → plugin `description`
-- [ ] `plugins/compound-engineering/README.md` → components table
+#### 2. Update version numbers
 
-#### 3. Update version numbers
-
-- [ ] `plugins/compound-engineering/.claude-plugin/plugin.json` → `version`
+- [ ] `plugins/insyd-engineering/.claude-plugin/plugin.json` → `version`
 - [ ] `.claude-plugin/marketplace.json` → plugin `version`
 
-#### 4. Update documentation
+#### 3. Update documentation
 
-- [ ] `plugins/compound-engineering/README.md` → component lists
-- [ ] `plugins/compound-engineering/CHANGELOG.md` → document changes
+- [ ] `plugins/insyd-engineering/README.md` → component lists
+- [ ] `plugins/insyd-engineering/CHANGELOG.md` → document changes
 
-#### 5. Validate JSON
+#### 4. Validate JSON
 
 ```bash
 cat .claude-plugin/marketplace.json | jq .
-cat plugins/compound-engineering/.claude-plugin/plugin.json | jq .
+cat plugins/insyd-engineering/.claude-plugin/plugin.json | jq .
 ```
 
 ### Marketplace.json Structure
@@ -128,7 +144,7 @@ cat plugins/compound-engineering/.claude-plugin/plugin.json | jq .
       "author": { ... },
       "homepage": "https://...",
       "tags": ["..."],
-      "source": "./plugins/compound-engineering"
+      "source": "./plugins/insyd-engineering"
     }
   ]
 }
@@ -158,7 +174,7 @@ cat plugins/compound-engineering/.claude-plugin/plugin.json | jq .
 
 ### Adding a New Agent
 
-1. Create `plugins/compound-engineering/agents/[category]/new-agent.md`
+1. Create `plugins/insyd-engineering/agents/[category]/new-agent.md`
 2. Update plugin.json description with new count
 3. Update marketplace.json description with new count
 4. Update README.md agent list
@@ -166,13 +182,13 @@ cat plugins/compound-engineering/.claude-plugin/plugin.json | jq .
 
 ### Adding a New Command
 
-1. Create `plugins/compound-engineering/commands/new-command.md`
+1. Create `plugins/insyd-engineering/commands/new-command.md`
 2. Update counts in plugin.json, marketplace.json, README.md
 3. Update CHANGELOG.md
 
 ### Adding a New Skill
 
-1. Create `plugins/compound-engineering/skills/skill-name/SKILL.md`
+1. Create `plugins/insyd-engineering/skills/skill-name/SKILL.md`
 2. Update counts everywhere
 3. Update CHANGELOG.md
 

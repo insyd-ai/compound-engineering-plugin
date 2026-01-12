@@ -96,4 +96,4 @@ Current counts (verify before committing):
 - **Agents**: 22
 - **Commands**: 20
 - **Skills**: 11
-- **MCP Servers**: 7
+- **MCP Servers**: 6

@@ -21,6 +21,19 @@ Restart Claude Code after installation.
 - SQLite persistence for sessions and observations
 - mem-search skill for natural language memory queries
 
+## Data Storage
+
+All data is stored in `~/.claude-mem/` by default (configurable via `CLAUDE_MEM_DATA_DIR` setting):
+
+| File/Directory | Description |
+|----------------|-------------|
+| `settings.json` | Configuration settings (auto-generated on first run) |
+| `claude-mem.db` | SQLite database (FTS5) for sessions, observations, and summaries |
+| `worker.port` | Current worker service port |
+| `logs/` | Worker logs (`worker-out.log`, `worker-error.log`) |
+
+The worker service runs on port 37777 with a web viewer UI at http://localhost:37777.
+
 ## Requirements
 
 - Node.js >=18.0.0

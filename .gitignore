@@ -7,3 +7,6 @@ node_modules/
 
 # Windows artifacts
 nul
+
+# Claude Code temp files
+tmpclaude-*

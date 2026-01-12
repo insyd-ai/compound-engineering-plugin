@@ -32,7 +32,7 @@
         "playwright",
         "engineering"
       ],
-      "source": "./plugins/compound-engineering"
+      "source": "./plugins/insyd-engineering"
     },
     {
       "name": "claude-mem",

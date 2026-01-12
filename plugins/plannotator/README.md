@@ -44,11 +44,6 @@ When an AI agent completes a plan, Plannotator opens a browser interface where y
 4. Approve to proceed with implementation
 5. Or send back feedback for the agent to revise
 
-## Supported Agents
-
-- Claude Code
-- OpenCode
-
 ## Links
 
 - [Website](https://plannotator.ai)

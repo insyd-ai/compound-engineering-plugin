@@ -1,14 +1,48 @@
 # Insyd Engineering Plugin
 
-A Claude Code plugin for JavaScript/TypeScript development workflows.
+A Claude Code plugin marketplace for JavaScript/TypeScript development workflows.
 
 > Forked from [compound-engineering-plugin](https://github.com/EveryInc/every-marketplace) by Every Inc.
 
-## Install
+## Quick Start
+
+### 1. Add to Your Project
+
+Create `.claude/settings.json` in your project root:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "insyd-plugins": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/insyd-ai/compound-engineering-plugin.git"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "insyd-engineering@insyd-plugins": true
+  }
+}
+```
+
+### 2. Start Claude Code
 
 ```bash
-claude plugin add insyd-ai/compound-engineering-plugin
+claude
 ```
+
+### 3. Use the Commands
+
+```
+/workflows:plan     # Plan implementation
+/workflows:review   # Review code
+/self-check         # Run all checks
+```
+
+That's it! See the [Setup Guide](docs/SETUP-GUIDE.md) for detailed instructions.
+
+---
 
 ## Workflow
 
@@ -29,17 +63,6 @@ Plan → Work → Review → Compound → Repeat
 - **Frontend**: Next.js, Astro, React, Vite
 - **Languages**: TypeScript, JavaScript
 
-## Use Cases
-
-1. Spec writing
-2. Functional testcases (success criteria)
-3. Code writing (frontend, backend)
-4. Test writing and execution
-5. Code refactoring
-6. Understanding large codebases
-7. Self checks
-8. PR reviews
-
 ## Components
 
 | Type | Count |
@@ -47,62 +70,76 @@ Plan → Work → Review → Compound → Repeat
 | Agents | 22 |
 | Commands | 20 |
 | Skills | 11 |
-| MCP Servers | 7 |
+| MCP Servers | 6 |
 
-## Learn More
+## Use Cases
 
-- [Full component reference](plugins/compound-engineering/README.md)
-- [Changelog](plugins/compound-engineering/CHANGELOG.md)
-- [MCP Setup Guide](plugins/compound-engineering/docs/MCP-SETUP.md)
+1. **Spec Writing** - PRD and TDD specifications
+2. **Functional Tests** - Define success criteria
+3. **Code Writing** - Frontend and backend development
+4. **Test Execution** - Unit, integration, and E2E tests
+5. **Code Refactoring** - Simplify and improve code
+6. **Codebase Understanding** - Analyze large codebases
+7. **Self Checks** - Security, performance, architecture
+8. **PR Reviews** - Comprehensive code review
 
-## Using as a Git Submodule
+## Documentation
 
-### Add to Your Project
+- [Setup Guide](docs/SETUP-GUIDE.md) - Complete setup and usage instructions
+- [Plugin Reference](plugins/insyd-engineering/README.md) - Full component reference
+- [Changelog](plugins/insyd-engineering/CHANGELOG.md) - Version history
+- [MCP Setup](plugins/insyd-engineering/docs/MCP-SETUP.md) - MCP server configuration
 
-```bash
-# Add as submodule in your project
-git submodule add https://github.com/insyd-ai/compound-engineering-plugin.git .claude/plugins/insyd
+## Repository Structure
 
-# Initialize and update
-git submodule update --init --recursive
+```
+compound-engineering-plugin/
+├── .claude-plugin/
+│   └── marketplace.json          # Marketplace catalog
+├── plugins/
+│   ├── insyd-engineering/        # Main plugin
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
+│   │   ├── agents/               # 22 specialized agents
+│   │   ├── commands/             # 20 slash commands
+│   │   ├── skills/               # 11 skills
+│   │   └── docs/
+│   ├── claude-mem/               # Memory plugin (external)
+│   └── plannotator/              # Plan annotation (external)
+└── docs/
+    └── SETUP-GUIDE.md            # This setup guide
 ```
 
-### Configure Claude Code
+## Optional: Additional Plugins
 
-Create/update `.claude/settings.json` in your project:
+Enable more plugins from this marketplace:
 
 ```json
 {
-  "plugins": {
-    "marketplaces": ["./.claude/plugins/insyd"]
+  "enabledPlugins": {
+    "insyd-engineering@insyd-plugins": true,
+    "claude-mem@insyd-plugins": true,
+    "plannotator@insyd-plugins": true
   }
 }
 ```
 
-### Install the Plugin
+## Version Pinning
 
-```bash
-claude plugin install insyd-engineering
-```
+For stability, pin to a specific version:
 
-### Install External Plugins (Optional)
-
-For claude-mem memory features:
-
-```bash
-/plugin marketplace add thedotmack/claude-mem
-/plugin install claude-mem
-```
-
-### Environment Variables
-
-Set these for full MCP functionality:
-
-```bash
-# Required for GitHub MCP
-export GITHUB_PAT="your_github_pat"
-
-# Linear and Figma use OAuth - authenticate via /mcp command
+```json
+{
+  "extraKnownMarketplaces": {
+    "insyd-plugins": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/insyd-ai/compound-engineering-plugin.git",
+        "ref": "v2.1.0"
+      }
+    }
+  }
+}
 ```
 
 ## Credits

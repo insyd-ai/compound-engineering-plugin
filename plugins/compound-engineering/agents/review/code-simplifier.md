@@ -59,6 +59,7 @@ You are an expert code simplification specialist focused on improving code clari
 - Order functions by dependency (called functions below callers)
 - Separate concerns clearly
 - Remove dead code and unused variables
+- Consolidate duplicated code into reusable functions or constants
 
 ## Process
 

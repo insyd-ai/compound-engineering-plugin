@@ -24,7 +24,7 @@ This plugin is designed for 8 core engineering workflows:
 | Agents | 22 |
 | Commands | 20 |
 | Skills | 11 |
-| MCP Servers | 7 |
+| MCP Servers | 6 |
 
 ## Agents
 
@@ -148,7 +148,6 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 | `convex` | stdio | Convex backend operations |
 | `linear` | stdio | Linear issue tracking integration |
 | `github` | http | GitHub repository operations |
-| `figma` | http | Figma design extraction |
 | `shadcn` | stdio | shadcn/ui component registry |
 
 ### Authentication Required
@@ -156,7 +155,6 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 Some MCP servers require authentication:
 - **GitHub**: Set `GITHUB_PAT` environment variable
 - **Linear**: Complete OAuth via `/mcp` command
-- **Figma**: Complete OAuth via `/mcp` command
 
 See [MCP-SETUP.md](docs/MCP-SETUP.md) for detailed setup instructions.
 
@@ -198,13 +196,6 @@ Supports 100+ frameworks including React, Next.js, Vue, Astro, Convex, and more.
 - Repository operations (PRs, issues)
 - Code search across repositories
 - Review and comment on changes
-
-### Figma
-
-**Tools provided:**
-- Extract designs from Figma files
-- Convert designs to code
-- Access component libraries
 
 ### shadcn
 

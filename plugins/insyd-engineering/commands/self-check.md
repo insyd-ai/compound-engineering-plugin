@@ -65,32 +65,39 @@ This command validates your changes before committing by:
 
 1. **TypeScript Compilation**:
    ```bash
-   npx tsc --noEmit
+   bunx tsc --noEmit
    ```
    - Must pass (0 errors)
    - Warnings are acceptable
 
 2. **Lint Checks**:
    ```bash
-   npm run lint
+   bun run lint
    ```
    - Errors must be fixed
    - Warnings generate advisory
 
 3. **Format Check** (if configured):
    ```bash
-   npm run format:check
+   bun run format:check
    ```
 
 #### Test Execution (Unless --skip-tests)
 
-4. **Run Affected Tests**:
+4. **Run All Tests**:
    ```bash
-   # Run tests for changed files
-   npm test -- --changedSince=HEAD~1
+   # Run unit and integration tests
+   bun test
 
-   # Or run full test suite if needed
-   npm test
+   # Run with coverage
+   bun test --coverage
+   ```
+   - Extract coverage percentage from output
+   - Verify coverage >= 80% threshold
+
+5. **Run E2E Tests** (if Playwright configured):
+   ```bash
+   bun run playwright test
    ```
 
 #### Full Check Additional (--full only)

@@ -1,13 +1,13 @@
 ---
 name: self-check
-description: This skill should be used for pre-commit validation to verify code correctness against success criteria. It integrates with functional test cases from docs/test-cases/ and provides validation workflows that can be skipped when needed.
+description: This skill should be used for pre-commit validation to verify code correctness against success criteria. It integrates with functional test cases from docs/test-cases/, enforces 80% coverage threshold, and provides validation workflows that can be skipped when needed.
 ---
 
 # Self-Check Skill
 
 ## Overview
 
-This skill provides pre-commit validation to verify code changes meet quality standards and success criteria before committing.
+This skill provides pre-commit validation to verify code changes meet quality standards and success criteria before committing. It uses Bun as the primary test runner and enforces an 80% coverage threshold.
 
 ## When to Use
 
@@ -16,6 +16,7 @@ This skill should be activated:
 - When validating implementation against specifications
 - As part of the development workflow
 - When explicitly requested via `/self-check` command
+- Automatically when using `/commit` command
 
 ## Validation Workflow
 
@@ -46,14 +47,20 @@ ls docs/test-cases/
 ### Step 3: Run Validation Checks
 
 #### Code Correctness
-- TypeScript compilation: `npx tsc --noEmit`
-- Lint checks: `npm run lint`
-- Format verification: `npm run format:check`
+- TypeScript compilation: `bunx tsc --noEmit`
+- Lint checks: `bun run lint`
+- Format verification: `bun run format:check` (if configured)
 
 #### Test Execution
-- Unit tests: `npm test`
-- Integration tests: `npm run test:integration`
-- Affected tests only: `npm test -- --changedSince=main`
+- Unit/Integration tests: `bun test`
+- Coverage check: `bun test --coverage`
+- E2E tests (if Playwright configured): `bun run playwright test`
+
+#### Coverage Threshold
+- **Required**: 80% minimum coverage
+- **Target**: 90% for critical paths
+- Extract coverage from `bun test --coverage` output
+- Block commit if below threshold
 
 #### Success Criteria Verification
 If functional test cases exist:
@@ -69,14 +76,17 @@ Generate a validation report:
 ```markdown
 ## Self-Check Results
 
-**Status**: PASS / FAIL
+**Status**: ✅ PASS / ❌ FAIL / ⚠️ WARNINGS
 
 ### Checks Performed
-- [ ] TypeScript compilation
-- [ ] Lint checks
-- [ ] Unit tests
-- [ ] Integration tests
-- [ ] Success criteria validation
+
+| Check | Status | Details |
+|-------|--------|---------|
+| TypeScript | ✅ PASS | 0 errors |
+| Lint | ✅ PASS | 0 errors, 2 warnings |
+| Tests | ✅ PASS | 15/15 passed |
+| Coverage | ✅ PASS | 87% (threshold: 80%) |
+| Success Criteria | ✅ PASS | 5/5 verified |
 
 ### Issues Found
 [List any issues with severity]

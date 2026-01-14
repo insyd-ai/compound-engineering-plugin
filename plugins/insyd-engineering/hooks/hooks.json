@@ -1,0 +1,39 @@
+{
+  "description": "TDD workflow enforcement hooks for Compound Engineering. Enforces test-driven development by validating tests exist before implementation code, and verifying tests are run before task completion.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/detect-test-framework.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/tdd-enforcer.sh",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Before completing this task, verify TDD compliance:\n\n1. If implementation code was written (Write/Edit on .ts/.js/.tsx/.jsx files that are NOT test files), check if tests were run.\n2. Look in the transcript for test execution commands: 'bun test', 'bun run playwright', or similar.\n3. If code was changed but tests weren't run, ask the user to run tests first.\n4. If user provides --skip-tdd flag with a reason, acknowledge and proceed.\n\nIf no implementation code was written (only docs, config, or test files), proceed without blocking.",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -91,6 +91,30 @@ These agents are run ONLY when the PR matches specific criteria. Check the PR fi
 - `data-migration-expert`: Verifies hard-coded mappings match production reality (prevents swapped IDs), checks for orphaned associations, validates dual-write patterns
 - `deployment-verification-agent`: Produces executable pre/post-deploy checklists with verification queries, rollback procedures, and monitoring plans
 
+---
+
+**If PR contains both test and implementation files:**
+
+16. Task tdd-timestamp-validator(PR content) - Validates TDD workflow compliance by checking commit timestamps
+
+**When to run TDD validator:**
+- PR includes test files (*.test.ts, *.spec.ts, *.test.js, etc.)
+- PR includes TypeScript/JavaScript implementation files
+- PR has commits from multiple timestamps (not a single squashed commit)
+
+**What this agent checks:**
+- `tdd-timestamp-validator`: Analyzes git commit history to verify test commits precede implementation commits. Calculates TDD compliance score and can block merge if score < 80%.
+
+**TDD Blocking Behavior:**
+- TDD score < 80%: **BLOCKS MERGE** (P1 finding)
+- TDD score 80-99%: Warning, advisory only (P2 finding)
+- TDD score 100%: PASS
+
+**What counts as TDD violation:**
+- Implementation file committed before its corresponding test file
+- Implementation commits > 1 hour before test commits
+- Implementation files with no corresponding test files
+
 </conditional_agents>
 
 ### 4. Ultra-Thinking Deep Dive Phases

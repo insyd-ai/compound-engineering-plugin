@@ -1,6 +1,6 @@
 ---
 name: test-writing
-description: This skill should be used when writing unit tests, integration tests, or functional tests. It provides patterns for test creation, execution, and reporting across different testing frameworks including Vitest, Jest, and Playwright.
+description: This skill should be used when writing unit tests, integration tests, or functional tests. It provides patterns for test creation, execution, and reporting using Bun test for unit/integration and Playwright for E2E tests. Supports TDD workflow where tests are written BEFORE implementation code.
 ---
 
 # Test Writing Skill
@@ -13,24 +13,41 @@ This skill provides structured approaches for writing and executing tests at dif
 2. **Integration Tests**: Module interaction testing
 3. **Functional Tests**: End-to-end feature testing
 
+## TDD Workflow (CRITICAL)
+
+Tests MUST be written BEFORE implementation code. This is enforced by hooks.
+
+**Order:**
+1. Write test file (`feature.test.ts`)
+2. Run tests - they should FAIL (no implementation yet)
+3. Write implementation code (`feature.ts`)
+4. Run tests - they should PASS
+5. Refactor if needed
+
 ## When to Use
 
 This skill should be activated when:
-- Writing tests for new code
+- Writing tests for new code (BEFORE implementation)
 - Adding test coverage to existing code
 - Creating test cases from specifications
 - Running and reporting on test results
 
 ## Testing Frameworks
 
-This skill supports the following frameworks commonly used in the target stack:
+This plugin uses Bun as the primary test runner:
 
-| Test Type | Framework | Config File |
-|-----------|-----------|-------------|
-| Unit | Vitest, Jest | vitest.config.ts, jest.config.js |
-| Integration | Vitest, Jest | Same as unit |
-| E2E | Playwright | playwright.config.ts |
-| Convex | Vitest with Convex test utils | convex.config.ts |
+| Test Type | Framework | Config File | Run Command |
+|-----------|-----------|-------------|-------------|
+| Unit | Bun test | bunfig.toml | `bun test` |
+| Integration | Bun test | bunfig.toml | `bun test` |
+| E2E | Playwright | playwright.config.ts | `bun run playwright test` |
+| Convex | Bun test with Convex | convex.config.ts | `bun test` |
+
+## Coverage Requirements
+
+- **Minimum threshold**: 80%
+- **Target**: 90% for critical business logic
+- **Command**: `bun test --coverage`
 
 ## References
 
@@ -75,16 +92,22 @@ Follow the AAA pattern:
 
 ```bash
 # Run all tests
-npm test
+bun test
 
 # Run specific test file
-npm test -- path/to/test.test.ts
+bun test path/to/test.test.ts
 
 # Run with coverage
-npm test -- --coverage
+bun test --coverage
 
 # Run in watch mode
-npm test -- --watch
+bun test --watch
+
+# Run E2E tests
+bun run playwright test
+
+# Run E2E with UI
+bun run playwright test --ui
 ```
 
 ## Test Naming Conventions

@@ -1,7 +1,7 @@
 {
   "name": "insyd-ai-engineering",
-  "version": "2.1.0",
-  "description": "Engineering plugin for modern JavaScript/TypeScript development. Specialized agents, commands, skills, and MCP servers for spec writing (PRD+TDD), functional testing, code review, refactoring, and codebase understanding.",
+  "version": "4.0.0",
+  "description": "Engineering plugin for modern JavaScript/TypeScript development with TDD enforcement and sub-agent orchestration. Features 24 agents, 24 commands, 14 skills, and hooks for Test-Driven Development workflow. Includes orchestrated feature development, Ralph autonomous loops, spec writing (PRD+TDD), functional testing, code review, refactoring, and codebase indexing.",
   "author": {
     "name": "Insyd-AI",
     "url": "https://github.com/insyd-ai"
@@ -18,14 +18,18 @@
     "react",
     "vite",
     "testing",
+    "tdd",
+    "test-driven-development",
+    "bun",
+    "playwright",
     "code-review",
     "refactoring",
     "spec-writing",
-    "playwright",
     "browser-automation",
     "engineering",
     "insyd-ai"
   ],
+  "hooks": "./hooks/hooks.json",
   "mcpServers": {
     "pw": {
       "type": "stdio",

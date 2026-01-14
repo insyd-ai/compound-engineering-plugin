@@ -11,8 +11,8 @@
   "plugins": [
     {
       "name": "insyd-engineering",
-      "description": "Engineering plugin for modern JavaScript/TypeScript development workflows. Includes specialized agents, commands, skills, and MCP servers for spec writing (PRD+TDD), functional testing, code review, refactoring, and codebase understanding. Optimized for Convex, Next.js, Astro, React, and Vite projects.",
-      "version": "2.1.0",
+      "description": "Engineering plugin for modern JavaScript/TypeScript development with TDD enforcement. Features 24 agents, 22 commands, 12 skills, and hooks for Test-Driven Development workflow. Uses Bun test runner with 80% coverage threshold. Includes spec writing (PRD+TDD), functional testing, code review, refactoring, and codebase indexing. Optimized for Convex, Next.js, Astro, React, and Vite projects.",
+      "version": "3.0.0",
       "author": {
         "name": "Insyd-AI",
         "url": "https://github.com/insyd-ai"
@@ -27,6 +27,8 @@
         "react",
         "vite",
         "testing",
+        "tdd",
+        "bun",
         "code-review",
         "refactoring",
         "playwright",

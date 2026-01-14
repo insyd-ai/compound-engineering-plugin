@@ -5,6 +5,122 @@ All notable changes to the Insyd Engineering plugin will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2026-01-14
+
+### Added
+
+**Sub-Agent Orchestration System (NEW):**
+- `skills/orchestration/` - New skill for Task-based sub-agent management
+  - Patterns for spawning isolated sub-agents
+  - Workflow coordination across spec → test → code phases
+  - Result aggregation and validation
+  - Reference: `workflow-patterns.md`, `sub-agent-prompts.md`
+
+**Ralph Autonomous Loop (NEW):**
+- `skills/ralph/` - Autonomous implementation loop skill
+  - Iterate until all tests pass (TDD GREEN phase)
+  - Progress tracking and stuck detection
+  - Debugging guidance and escalation patterns
+  - Reference: `iteration-strategies.md`, `debugging-guide.md`
+- `/ralph` command - Start autonomous implementation loop
+  - Pre-flight validation (tests must exist and fail)
+  - Iterative implementation until tests pass
+  - Completion report with quality metrics
+
+**New Commands (2):**
+- `/ralph` - Autonomous implementation loop that iterates until all tests pass
+- `/workflows:feature` - Complete TDD feature development with orchestrated sub-agents
+
+### Changed
+
+**TDD Enforcement Enhanced (BREAKING):**
+- `hooks/tdd-enforcer.sh` - Now uses HARD BLOCK (`permissionDecision: deny`) instead of ask
+  - Implementation code writes are completely blocked without tests
+  - Clear guidance on TDD workflow steps
+  - Emergency bypass requires `/commit --skip-self-check "emergency: reason"`
+
+### Summary
+
+- **24 agents** (unchanged)
+- **24 commands** (+2: ralph, workflows:feature)
+- **14 skills** (+2: orchestration, ralph)
+- **6 MCP servers** (unchanged)
+- **1 hooks configuration** (enhanced: hard-block TDD enforcement)
+
+### Migration Notes
+
+This is a **MAJOR** version bump due to:
+1. **TDD enforcement is now HARD BLOCK** - Code writes denied (not just asked) without tests
+2. **New orchestration workflow** - `/workflows:feature` provides complete TDD pipeline
+3. **Ralph loop** - Autonomous implementation until tests pass
+
+**New Workflow:**
+```
+/workflows:feature "feature description"
+├─ Phase 1: Spec Writing (sub-agent)
+├─ Phase 2: Functional Test Cases (sub-agent)
+├─ Phase 3: Test Writing - RED Phase (sub-agent)
+├─ Phase 4: Implementation - /ralph (iterative)
+├─ Phase 5: Validation - /self-check
+└─ Phase 6: Commit
+```
+
+---
+
+## [3.0.0] - 2026-01-14
+
+### Added
+
+**TDD Enforcement (BREAKING CHANGE):**
+- `hooks/hooks.json` - Claude Code hooks for TDD workflow enforcement
+- `hooks/detect-test-framework.sh` - SessionStart hook to detect Bun/Playwright test setup
+- `hooks/tdd-enforcer.sh` - PreToolUse hook that blocks implementation code writes until tests exist
+- Stop hook prompt that verifies tests were run before task completion
+
+**New Agents (2):**
+- `tdd-timestamp-validator` - PR review agent that validates TDD compliance by checking git commit timestamps. Blocks merge if TDD score < 80%
+- `codebase-indexer` - Generates codebase documentation (CODEBASE_MAP.md, ARCHITECTURE.md, API_INDEX.md, DEPENDENCY_GRAPH.md)
+
+**New Commands (2):**
+- `/commit` - Git commit with integrated self-check validation. Runs TypeScript, lint, tests, and coverage checks before committing. Supports `--skip-self-check "reason"` bypass
+- `/index-codebase` - Analyze and index codebase, generating documentation deliverables in `docs/codebase/`
+
+**New Skill (1):**
+- `tdd-workflow` - Comprehensive TDD workflow documentation including enforcement rules, bypass policy, and test file detection patterns
+
+### Changed
+
+**Bun Test Integration:**
+- Updated `self-check` skill - All test commands now use `bun test`, `bun test --coverage`, `bun run playwright test`
+- Updated `test-writing` skill - Added TDD workflow section, Bun as primary test runner, 80% coverage requirements
+- Updated `/self-check` command - Bun commands, E2E integration, coverage threshold
+- Added 80% coverage threshold enforcement across all validation points
+
+**PR Review Enhancement:**
+- `/workflows:review` - Added `tdd-timestamp-validator` as conditional agent. Validates TDD workflow was followed by checking commit timestamps. Can block PR merge if score < 80%
+
+### Summary
+
+- **24 agents** (+2: tdd-timestamp-validator, codebase-indexer)
+- **22 commands** (+2: commit, index-codebase)
+- **12 skills** (+1: tdd-workflow)
+- **6 MCP servers** (unchanged)
+- **1 hooks configuration** (NEW: 3 hook events)
+
+### Migration Notes
+
+This is a **MAJOR** version bump due to:
+1. **TDD enforcement is now mandatory** - Claude will block writing implementation code until tests exist
+2. **Commit workflow changed** - `/commit` now runs self-check automatically
+3. **Coverage threshold enforced** - 80% minimum coverage required
+
+To bypass TDD enforcement (use sparingly):
+- During development: Tests must exist before implementation writes
+- During commit: Use `--skip-self-check "reason"` flag
+- Skip reasons are logged in commit messages and flagged in PR reviews
+
+---
+
 ## [2.1.0] - 2026-01-11
 
 ### Added

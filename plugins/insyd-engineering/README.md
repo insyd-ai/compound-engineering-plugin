@@ -1,36 +1,79 @@
 # Insyd Engineering Plugin
 
-Engineering plugin for modern JavaScript/TypeScript development workflows. Optimized for Convex, Next.js, Astro, React, and Vite projects.
+Engineering plugin for modern JavaScript/TypeScript development with **TDD enforcement** and **sub-agent orchestration**. Uses Bun test runner and Playwright for E2E. Optimized for Convex, Next.js, Astro, React, and Vite projects.
 
 > Forked from [compound-engineering-plugin](https://github.com/EveryInc/every-marketplace) by Every Inc.
+
+## New in v4.0.0: Sub-Agent Orchestration
+
+This version introduces **Task-based sub-agent orchestration** for complete TDD workflows:
+
+```
+/workflows:feature "User authentication with OAuth"
+│
+├─ Phase 1: Specs (sub-agent)
+│   └─ Generate PRD + TDD documents
+│
+├─ Phase 2: Test Cases (sub-agent)
+│   └─ Generate functional test cases
+│
+├─ Phase 3: Test Writing (sub-agent) ← RED Phase
+│   └─ Generate failing tests
+│   └─ ⛔ HARD BLOCK: No code without tests
+│
+├─ Phase 4: Implementation ← /ralph loop
+│   └─ Iterate until ALL tests pass
+│
+├─ Phase 5: Validation
+│   └─ /self-check (TypeScript, lint, coverage)
+│
+└─ Phase 6: Commit
+    └─ Only if validation passes
+```
+
+**Key commands:**
+- `/workflows:feature` - Complete TDD workflow with orchestrated sub-agents
+- `/ralph` - Autonomous implementation loop (iterate until tests pass)
+
+## TDD Enforcement (HARD BLOCK)
+
+This plugin enforces **Test-Driven Development** with a HARD BLOCK:
+- ⛔ Code writes are **DENIED** (not just asked) without tests
+- Tests MUST be written BEFORE implementation code
+- 80% coverage threshold required
+- `/commit` command runs self-check automatically
+- PR reviews validate TDD compliance via commit timestamps
+
+See the `tdd-workflow` and `orchestration` skills for details.
 
 ## Use Cases
 
 This plugin is designed for 8 core engineering workflows:
 
-1. **Spec Writing** - Analyze specifications for completeness and user flows
+1. **Spec Writing** - Generate PRD and TDD specification documents
 2. **Functional Testcases** - Define success criteria and test scenarios
 3. **Code Writing** - Frontend (React, Next.js, Astro, Vite) and backend (Convex) development
-4. **Test Writing & Execution** - Unit, integration, and functional tests with Playwright
+4. **Test Writing & Execution** - Unit, integration, and E2E tests with Bun and Playwright
 5. **Code Refactoring** - Simplify and improve code quality
-6. **Codebase Understanding** - Index and analyze large codebases
-7. **Self Checks** - Security, performance, and architecture reviews
-8. **PR Reviews** - Comprehensive code review with specialized agents
+6. **Codebase Understanding** - Index and analyze large codebases with documentation deliverables
+7. **Self Checks** - Pre-commit validation with coverage enforcement
+8. **PR Reviews** - Comprehensive code review with TDD validation
 
 ## Components
 
 | Component | Count |
 |-----------|-------|
-| Agents | 22 |
-| Commands | 20 |
-| Skills | 11 |
+| Agents | 24 |
+| Commands | 24 |
+| Skills | 14 |
 | MCP Servers | 6 |
+| Hooks | 3 events (with HARD BLOCK TDD enforcement) |
 
 ## Agents
 
 Agents are organized into categories for easier discovery.
 
-### Review (12)
+### Review (13)
 
 | Agent | Description |
 |-------|-------------|
@@ -46,6 +89,7 @@ Agents are organized into categories for easier discovery.
 | `pattern-recognition-specialist` | Analyze code for patterns and anti-patterns |
 | `performance-oracle` | Performance analysis and optimization |
 | `security-sentinel` | Security audits and vulnerability assessments |
+| `tdd-timestamp-validator` | Validate TDD workflow by checking commit timestamps (blocks merge if < 80%) |
 
 ### Research (4)
 
@@ -56,11 +100,12 @@ Agents are organized into categories for easier discovery.
 | `git-history-analyzer` | Analyze git history and code evolution |
 | `repo-research-analyst` | Research repository structure and conventions |
 
-### Workflow (6)
+### Workflow (7)
 
 | Agent | Description |
 |-------|-------------|
 | `bug-reproduction-validator` | Systematically reproduce and validate bug reports |
+| `codebase-indexer` | Generate codebase documentation (CODEBASE_MAP, ARCHITECTURE, API_INDEX, DEPENDENCY_GRAPH) |
 | `functional-test-writer` | Generate comprehensive functional test cases |
 | `pr-comment-resolver` | Address PR comments and implement fixes |
 | `prd-writer` | Generate Product Requirements Documents from user perspective |
@@ -75,6 +120,7 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 
 | Command | Description |
 |---------|-------------|
+| `/workflows:feature` | **NEW** Complete TDD feature development with orchestrated sub-agents |
 | `/workflows:plan` | Create implementation plans |
 | `/workflows:review` | Run comprehensive code reviews |
 | `/workflows:work` | Execute work items systematically |
@@ -87,7 +133,10 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 | `/spec:write` | Generate PRD and TDD specification documents |
 | `/test:functional` | Generate functional test cases with success criteria |
 | `/test:write` | Write unit, integration, or E2E tests |
+| `/ralph` | **NEW** Autonomous implementation loop - iterate until all tests pass |
 | `/self-check` | Run pre-commit validation checks |
+| `/commit` | Git commit with integrated self-check (runs TypeScript, lint, tests, coverage) |
+| `/index-codebase` | Generate codebase documentation in `docs/codebase/` |
 
 ### Utility Commands
 
@@ -120,8 +169,16 @@ Core workflow commands use `workflows:` prefix to avoid collisions with built-in
 | Skill | Description |
 |-------|-------------|
 | `spec-writing` | Templates and guidelines for PRD and TDD creation |
-| `test-writing` | Patterns for unit, integration, and E2E testing |
-| `self-check` | Pre-commit validation with success criteria verification |
+| `test-writing` | Patterns for unit, integration, and E2E testing with Bun |
+| `self-check` | Pre-commit validation with 80% coverage enforcement |
+| `tdd-workflow` | TDD enforcement rules, bypass policy, and workflow documentation |
+
+### Orchestration & Automation (NEW in v4.0.0)
+
+| Skill | Description |
+|-------|-------------|
+| `orchestration` | **NEW** Task-based sub-agent orchestration for complex workflows |
+| `ralph` | **NEW** Autonomous implementation loop - iterate until tests pass |
 
 ### Development Tools
 

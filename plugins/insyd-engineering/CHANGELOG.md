@@ -5,6 +5,53 @@ All notable changes to the Insyd Engineering plugin will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.0] - 2026-01-14
+
+### Enhanced
+
+**Ralph Autonomous Loop - Parallel Subagents:**
+- `/ralph` command now supports spawning multiple isolated subagents for parallel implementation
+- Each subagent gets fresh context with only its relevant tests (no context bleeding)
+- Automatic module analysis to identify parallelizable work
+- Dependency graph generation for sequencing dependent modules
+- Result aggregation with retry logic for partial completions
+
+**New Features:**
+- `--parallel` flag to force parallel mode
+- `--modules M1,M2,M3` to manually specify modules to parallelize
+- `--sequential` flag to force original single-agent behavior
+- Automatic mode selection based on test count and module independence
+
+**Architecture:**
+```
+RALPH ORCHESTRATOR
+├── Phase 1: Analysis (parse tests, identify modules, create dependency graph)
+├── Phase 2: Parallel Implementation (spawn N subagents for independent modules)
+├── Phase 3: Result Aggregation (collect outputs, handle partial completions)
+└── Phase 4: Validation (full test suite, coverage, completion report)
+```
+
+**Benefits:**
+- Isolated contexts prevent bleeding between modules
+- Faster completion via parallel execution
+- Better focus (each subagent only sees relevant tests)
+- Easier debugging (failures isolated to specific modules)
+- Retry efficiency (only retry failed modules, not entire feature)
+
+### Updated
+
+- `skills/ralph/ralph.md` - Complete rewrite with parallel subagent orchestration patterns
+- `commands/ralph.md` - Enhanced with module analysis and subagent spawning workflows
+
+### Summary
+
+- **24 agents** (unchanged)
+- **24 commands** (unchanged)
+- **14 skills** (unchanged)
+- **6 MCP servers** (unchanged)
+
+---
+
 ## [4.0.0] - 2026-01-14
 
 ### Added

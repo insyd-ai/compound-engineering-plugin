@@ -1,7 +1,7 @@
 {
   "name": "insyd-ai-engineering",
-  "version": "4.0.0",
-  "description": "Engineering plugin for modern JavaScript/TypeScript development with TDD enforcement and sub-agent orchestration. Features 24 agents, 24 commands, 14 skills, and hooks for Test-Driven Development workflow. Includes orchestrated feature development, Ralph autonomous loops, spec writing (PRD+TDD), functional testing, code review, refactoring, and codebase indexing.",
+  "version": "4.1.0",
+  "description": "Engineering plugin for modern JavaScript/TypeScript development with TDD enforcement and sub-agent orchestration. Features 24 agents, 24 commands, 14 skills, and hooks for Test-Driven Development workflow. Includes orchestrated feature development, Ralph autonomous loops with parallel subagents, spec writing (PRD+TDD), functional testing, code review, refactoring, and codebase indexing.",
   "author": {
     "name": "Insyd-AI",
     "url": "https://github.com/insyd-ai"
